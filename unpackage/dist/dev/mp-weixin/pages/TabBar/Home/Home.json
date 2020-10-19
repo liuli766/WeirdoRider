@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "distribution": "/components/Distribution/Distribution",
+    "pop": "/components/PopBox/PopBox",
+    "ordercomplted": "/components/OrderCompleted/OrderCompleted",
+    "concatpop": "/components/ConcatPop/ConcatPop"
+  }
+}

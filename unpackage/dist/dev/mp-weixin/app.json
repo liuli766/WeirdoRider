@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/TabBar/Home/Home",
+    "pages/TabBar/FundManagement/FundManagement",
+    "pages/TabBar/DataStatistics/DataStatistics",
+    "pages/TabBar/Mine/Mine",
+    "components/OrderCompleted/OrderCompleted",
+    "pages/Detail/OrdercompDetail/OrdercompDetail",
+    "pages/Other/cash/cash",
+    "pages/Other/cardInfo/cardInfo",
+    "pages/Other/billingRecords/billingRecords",
+    "pages/Detail/PickupDetail/PickupDetail",
+    "pages/Detail/distribuDetail/distribuDetail",
+    "pages/Detail/giveDetail/giveDetail",
+    "pages/login/login",
+    "pages/Other/AccountSet/AccountSet",
+    "pages/Other/personInput/personInput",
+    "pages/Other/handbook/handbook",
+    "pages/Other/realName/realName",
+    "pages/register/register"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#FFAC68",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/TabBar/Home/Home",
+        "selectedIconPath": "static/img/tabar1act.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/TabBar/FundManagement/FundManagement",
+        "iconPath": "static/img/tabar2.png",
+        "selectedIconPath": "static/img/tabar2act.png",
+        "text": "资金管理"
+      },
+      {
+        "pagePath": "pages/TabBar/DataStatistics/DataStatistics",
+        "iconPath": "static/img/tabar3.png",
+        "selectedIconPath": "static/img/tabar3act.png",
+        "text": "数据统计"
+      },
+      {
+        "pagePath": "pages/TabBar/Mine/Mine",
+        "iconPath": "static/img/tabar4.png",
+        "selectedIconPath": "static/img/tabar4act.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

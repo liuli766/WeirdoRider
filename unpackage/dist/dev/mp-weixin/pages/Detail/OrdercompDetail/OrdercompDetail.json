@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "订单详情",
+  "usingComponents": {
+    "ordercomplted": "/components/OrderCompleted/OrderCompleted",
+    "concatpop": "/components/ConcatPop/ConcatPop"
+  }
+}
