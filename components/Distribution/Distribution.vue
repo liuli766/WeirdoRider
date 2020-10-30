@@ -61,6 +61,7 @@
 	padding: 30upx;
 	border-radius: 10upx;
 	background: #fff;
+	margin-bottom: 30upx;
 	.title{
 		height: 90upx;
 	}

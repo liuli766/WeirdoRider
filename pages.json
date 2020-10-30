@@ -11,115 +11,110 @@
 			"style": {
 				"navigationBarTitleText": "资金管理"
 			}
-		}
-	    ,{
-            "path" : "pages/TabBar/DataStatistics/DataStatistics",
-            "style" : {
+		}, {
+			"path": "pages/TabBar/DataStatistics/DataStatistics",
+			"style": {
 				"navigationBarTitleText": "数据统计"
 			}
-        }
-        ,{
-            "path" : "pages/TabBar/Mine/Mine",
-            "style" : {
+		}, {
+			"path": "pages/TabBar/Mine/Mine",
+			"style": {
 				"navigationBarTitleText": "个人中心"
 			}
-        }
-        ,{
-            "path" : "components/OrderCompleted/OrderCompleted",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/Detail/OrdercompDetail/OrdercompDetail",
-            "style" : {
-				"navigationBarTitleText": "订单详情"
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationStyle": "custom"
 			}
-        }
-        ,{
-            "path" : "pages/Other/cash/cash",
-            "style" : {
-				"navigationBarTitleText": "提现"
-			}
-        }
-        ,{
-            "path" : "pages/Other/cardInfo/cardInfo",
-            "style" : {
-				"navigationBarTitleText": "银行卡信息"
-			}
-        }
-        ,{
-            "path" : "pages/Other/billingRecords/billingRecords",
-            "style" : {
-				"navigationBarTitleText": "账单记录"
-			}
-        }
-        ,{
-            "path" : "pages/Detail/PickupDetail/PickupDetail",
-            "style" : {
-				"navigationBarTitleText": "订单详情"
-			}
-        }
-        ,{
-            "path" : "pages/Detail/distribuDetail/distribuDetail",
-            "style" : {
-				"navigationBarTitleText": "订单详情"
-			}
-        }
-        ,{
-            "path" : "pages/Detail/giveDetail/giveDetail",
-            "style" : {
-				"navigationBarTitleText": "订单详情"
-			}
-        }
-		,{
-		    "path" : "pages/login/login",
-		    "style" : {
+		}, {
+			"path": "pages/register/register",
+			"style": {
 				"navigationStyle": "custom"
 			}
 		}
-       
-        ,{
-            "path" : "pages/Other/AccountSet/AccountSet",
-            "style" : {
-				"navigationBarTitleText": "账户设置"
-			}
-        }
-        ,{
-            "path" : "pages/Other/personInput/personInput",
-            "style" : {
-				"navigationStyle": "custom"
-			}
-        }
-        ,{
-            "path" : "pages/Other/handbook/handbook",
-            "style" : {
-				"navigationBarTitleText": "骑手手册"
-			}
-        }
-        ,{
-            "path" : "pages/Other/realName/realName",
-            "style" : {
-				"navigationBarTitleText": "实名认证"
-			}
-        }
-        ,{
-            "path" : "pages/register/register",
-            "style" : {
-				"navigationStyle": "custom"
-			}
-        }
-    ],
+	],
+	"subPackages": [{
+			"root": "pages/Detail",
+			"pages": [{
+					"path": "OrdercompDetail/OrdercompDetail",
+					"style": {
+						"navigationBarTitleText": "订单详情"
+					}
+				},
+				{
+					"path": "PickupDetail/PickupDetail",
+					"style": {
+						"navigationBarTitleText": "订单详情"
+					}
+				}, {
+					"path": "distribuDetail/distribuDetail",
+					"style": {
+						"navigationBarTitleText": "订单详情"
+					}
+				}, {
+					"path": "giveDetail/giveDetail",
+					"style": {
+						"navigationBarTitleText": "订单详情"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/Other",
+			"pages": [{
+					"path": "AccountSet/AccountSet",
+					"style": {
+						"navigationBarTitleText": "账户设置"
+					}
+				}, {
+					"path": "personInput/personInput",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				}, {
+					"path": "handbook/handbook",
+					"style": {
+						"navigationBarTitleText": "骑手手册"
+					}
+				}, {
+					"path": "realName/realName",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "billingRecords/billingRecords",
+					"style": {
+						"navigationBarTitleText": "账单记录"
+					}
+				},
+
+				{
+					"path": "cash/cash",
+					"style": {
+						"navigationBarTitleText": "提现"
+					}
+				}, {
+					"path": "cardInfo/cardInfo",
+					"style": {
+						"navigationBarTitleText": "银行卡信息"
+					}
+				}
+			]
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#fff",
 		"backgroundColor": "#F8F8F8"
 	},
-	"tabBar":{
+	"tabBar": {
 		"color": "#666666",
 		"selectedColor": "#FFAC68",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"list":[{
+		"list": [{
 				"pagePath": "pages/TabBar/Home/Home",
 				"selectedIconPath": "static/img/tabar1act.png",
 				"text": "首页"
@@ -142,8 +137,8 @@
 				"selectedIconPath": "static/img/tabar4act.png",
 				"text": "我的"
 			}
-			
-			
-			]
+
+
+		]
 	}
 }

@@ -18,7 +18,7 @@
 				</view>
 				<view class="login-list mb">
 					<view class="color3434 font32 font500 login-user">密码</view>
-					<input type="text" value="" placeholder="请输入你的密码" />
+					<input type="password" value="" placeholder="请输入你的密码" />
 				</view>
 				<view class="flex flex_al-cen pad">
 					<text class="cicle"></text>

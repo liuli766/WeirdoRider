@@ -24,7 +24,7 @@
 			</view>
 		</view>
 		<view class="flex flex_be list-item " @tap="Gocash">
-			<text>我要提现</text>
+			<text class="color333  font30">我要提现</text>
 			<text class="iconfont icon-you"></text>
 		</view>
 	</view>

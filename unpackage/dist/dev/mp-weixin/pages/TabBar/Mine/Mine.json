@@ -1,6 +1,4 @@
 {
   "navigationBarTitleText": "个人中心",
-  "usingComponents": {
-    "workpop": "/components/workPop/workPop"
-  }
+  "usingComponents": {}
 }

@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "实名认证",
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "comminput": "/components/personInput"
+  }
 }

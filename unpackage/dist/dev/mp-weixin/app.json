@@ -4,22 +4,32 @@
     "pages/TabBar/FundManagement/FundManagement",
     "pages/TabBar/DataStatistics/DataStatistics",
     "pages/TabBar/Mine/Mine",
-    "components/OrderCompleted/OrderCompleted",
-    "pages/Detail/OrdercompDetail/OrdercompDetail",
-    "pages/Other/cash/cash",
-    "pages/Other/cardInfo/cardInfo",
-    "pages/Other/billingRecords/billingRecords",
-    "pages/Detail/PickupDetail/PickupDetail",
-    "pages/Detail/distribuDetail/distribuDetail",
-    "pages/Detail/giveDetail/giveDetail",
     "pages/login/login",
-    "pages/Other/AccountSet/AccountSet",
-    "pages/Other/personInput/personInput",
-    "pages/Other/handbook/handbook",
-    "pages/Other/realName/realName",
     "pages/register/register"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "pages/Detail",
+      "pages": [
+        "OrdercompDetail/OrdercompDetail",
+        "PickupDetail/PickupDetail",
+        "distribuDetail/distribuDetail",
+        "giveDetail/giveDetail"
+      ]
+    },
+    {
+      "root": "pages/Other",
+      "pages": [
+        "AccountSet/AccountSet",
+        "personInput/personInput",
+        "handbook/handbook",
+        "realName/realName",
+        "billingRecords/billingRecords",
+        "cash/cash",
+        "cardInfo/cardInfo"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",

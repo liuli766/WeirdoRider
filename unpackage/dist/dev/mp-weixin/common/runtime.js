@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/ConcatPop/ConcatPop":1,"components/Distribution/Distribution":1,"components/PopBox/PopBox":1,"components/workPop/workPop":1,"components/commoninput/commoninput":1};
+/******/ 		var cssChunks = {"components/ConcatPop/ConcatPop":1,"components/Distribution/Distribution":1,"components/OrderCompleted/OrderCompleted":1,"components/PopBox/PopBox":1,"components/personInput":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/ConcatPop/ConcatPop":"components/ConcatPop/ConcatPop","components/Distribution/Distribution":"components/Distribution/Distribution","components/PopBox/PopBox":"components/PopBox/PopBox","components/workPop/workPop":"components/workPop/workPop","components/commoninput/commoninput":"components/commoninput/commoninput"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/ConcatPop/ConcatPop":"components/ConcatPop/ConcatPop","components/Distribution/Distribution":"components/Distribution/Distribution","components/OrderCompleted/OrderCompleted":"components/OrderCompleted/OrderCompleted","components/PopBox/PopBox":"components/PopBox/PopBox","components/personInput":"components/personInput"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

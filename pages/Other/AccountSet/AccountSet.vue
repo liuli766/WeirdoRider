@@ -10,7 +10,7 @@
 			</view>
 		</view>
 		<view class="mt30">
-			<view class="flex flex_be list-item line" @tap="personInput(item)" v-for="(item,i) in usersetList" :key="i">
+			<view class="flex flex_be list-item line" v-for="(item,i) in usersetList" :key="i">
 				<text class="color3434 font500 font30">{{item.name}}</text>
 				<view class="flex flex_al-cen flex_jus-cen">
 					<input type="text" :placeholder="item.placeholder" disabled />
@@ -60,11 +60,6 @@
 				    }
 				});
 			},
-			personInput(item){
-				uni.navigateTo({
-					url:'/pages/Other/personInput/personInput?item='+encodeURIComponent(JSON.stringify(item))
-				})
-			}
 		}
 	}
 </script>

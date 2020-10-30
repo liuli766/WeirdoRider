@@ -81,6 +81,9 @@
 .bfff.data-v-891c2434 {
   background: #fff;
 }
+.colorffa.data-v-891c2434 {
+  color: #FFA46C;
+}
 view.data-v-891c2434, text.data-v-891c2434 {
   font-family: PingFang SC;
 }
@@ -123,6 +126,17 @@ view.data-v-891c2434, text.data-v-891c2434 {
   width: 100%;
   overflow: auto;
 }
+/*其他样式*/
+.commbtn.data-v-891c2434 {
+  width: 690rpx;
+  line-height: 80rpx;
+  background: -webkit-linear-gradient(9deg, #6D99F8 0%, #3C66DF 100%);
+  background: linear-gradient(81deg, #6D99F8 0%, #3C66DF 100%);
+  box-shadow: 0px 5rpx 20rpx 0px rgba(209, 108, 77, 0.2);
+  border-radius: 10rpx;
+  margin: 0 auto;
+  margin-top: 80rpx;
+}
 /* 行为相关颜色 */
 /* 文字基本颜色 */
 /* 背景颜色 */
@@ -135,13 +149,6 @@ view.data-v-891c2434, text.data-v-891c2434 {
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.login-box.data-v-891c2434 {
-  background-color: #fff;
-  height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
-}
 .login-box .login-bg image.data-v-891c2434 {
   width: 100%;
   height: 365rpx;
@@ -154,43 +161,53 @@ view.data-v-891c2434, text.data-v-891c2434 {
   left: 0;
   padding-left: 38rpx;
 }
-.login-box .login-bg .login-nav .back.data-v-891c2434 {
-  margin-right: 250rpx;
-}
 .login-box .form.data-v-891c2434 {
-  margin-top: 199rpx;
-  padding: 0 60rpx;
-}
-.login-box .login-list.data-v-891c2434 {
-  border-bottom: 1rpx solid #DEDEDE;
-  margin-bottom: 60rpx;
-}
-.login-box .mb.data-v-891c2434 {
-  margin-bottom: 30rpx;
-}
-.login-box input.data-v-891c2434 {
-  padding-bottom: 26rpx;
-}
-.login-box .login-user.data-v-891c2434 {
-  margin-bottom: 46rpx;
-}
-.login-box .cicle.data-v-891c2434 {
-  display: inline-block;
-  width: 32rpx;
-  height: 32rpx;
-  border: 1rpx solid #666666;
-  border-radius: 50%;
-  margin-right: 10rpx;
-}
-.login-box .pad.data-v-891c2434 {
-  margin-bottom: 105rpx;
-}
-.login-box .login-btn.data-v-891c2434 {
-  width: 630rpx;
-  height: 80rpx;
-  background: -webkit-linear-gradient(9deg, #6E9AF8 0%, #3C66DF 100%);
-  background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
+  width: 690rpx;
+  height: 716rpx;
+  box-sizing: border-box;
+  margin: 30rpx;
   border-radius: 10rpx;
-  line-height: 80rpx;
+  position: absolute;
+  top: 202rpx;
+  left: 0;
+}
+.login-box .form .login-list.data-v-891c2434 {
+  line-height: 88rpx;
+  border-bottom: 1rpx solid #EEEEEE;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  position: relative;
+}
+.login-box .form input.data-v-891c2434 {
+  text-align: center;
+}
+.login-box .form .login-btn.data-v-891c2434 {
+  width: 690rpx;
+  height: 80rpx;
+  background: #FFAC68;
+  opacity: 1;
+}
+.login-box .form .register-xy.data-v-891c2434 {
+  margin: 40rpx 0 80rpx 0;
+}
+.login-box .form .meun-name.data-v-891c2434 {
+  position: relative;
+}
+.login-box .form .meun-name .meun.data-v-891c2434 {
+  position: absolute;
+  top: 66rpx;
+  right: 0;
+  width: 200rpx;
+  height: 200rpx;
+  background: #fff;
+  box-shadow: 0px 5rpx 10rpx 0px rgba(0, 0, 0, 0.05);
+  border-radius: 10rpx;
+  z-index: 9;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+.login-box .form .meun-name .meun text.data-v-891c2434:hover {
+  background: #F7F9FA;
 }
 

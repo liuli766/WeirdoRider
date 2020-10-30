@@ -32,16 +32,11 @@
 				<text class="iconfont icon-you"></text>
 			</view>
 		</view>
-		<workpop />
 	</view>
 </template>
 
 <script>
-	import workpop from '@/components/workPop/workPop.vue'
 	export default {
-		components: {
-			workpop
-		},
 		data() {
 			return {
 				

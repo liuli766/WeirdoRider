@@ -7,6 +7,7 @@ const store = new Vuex.Store({
     state: {
 		isPop:false,
 		isConcatPop:false,
+		iscomminput:false,
     },
 	getters: {
 		
@@ -17,6 +18,9 @@ const store = new Vuex.Store({
 		},
 		showConcatPop(state,val){
 			state.isConcatPop=val
+		},
+		Showcomminput(state,val){
+			state.iscomminput=val
 		}
     },
 	actions:{

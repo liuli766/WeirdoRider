@@ -12,41 +12,41 @@
  * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
  */
 /* flex布局 */
-.flex.data-v-557adb06, .flex-col.data-v-557adb06, .flex_be.data-v-557adb06, .flex_al-cen.data-v-557adb06, .flex_jus-cen.data-v-557adb06, .flex_ar.data-v-557adb06 {
+.flex.data-v-6df0c10a, .flex-col.data-v-6df0c10a, .flex_be.data-v-6df0c10a, .flex_al-cen.data-v-6df0c10a, .flex_jus-cen.data-v-6df0c10a, .flex_ar.data-v-6df0c10a {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
 }
-.flex-col.data-v-557adb06 {
+.flex-col.data-v-6df0c10a {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
           flex-direction: column;
 }
-.flex_be.data-v-557adb06 {
+.flex_be.data-v-6df0c10a {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
           justify-content: space-between;
 }
-.flex_al-cen.data-v-557adb06 {
+.flex_al-cen.data-v-6df0c10a {
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
 }
-.flex_jus-cen.data-v-557adb06 {
+.flex_jus-cen.data-v-6df0c10a {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
 }
-.flex_ar.data-v-557adb06 {
+.flex_ar.data-v-6df0c10a {
   -webkit-justify-content: space-around;
           justify-content: space-around;
 }
-.text_cen.data-v-557adb06 {
+.text_cen.data-v-6df0c10a {
   text-align: center;
 }
 /* 省略号 */
-.two-wrap.data-v-557adb06 {
+.two-wrap.data-v-6df0c10a {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -54,74 +54,88 @@
   -webkit-box-orient: vertical;
 }
 /* 颜色变量 */
-.color666.data-v-557adb06 {
+.color666.data-v-6df0c10a {
   color: #666666;
 }
-.color3434.data-v-557adb06 {
+.color3434.data-v-6df0c10a {
   color: #343434;
 }
-.colorfff.data-v-557adb06 {
+.colorfff.data-v-6df0c10a {
   color: #fff;
 }
-.color9a9a.data-v-557adb06 {
+.color9a9a.data-v-6df0c10a {
   color: #9A9A9A;
 }
-.color333.data-v-557adb06 {
+.color333.data-v-6df0c10a {
   color: #333;
 }
-.color999.data-v-557adb06 {
+.color999.data-v-6df0c10a {
   color: #999;
 }
-.bold.data-v-557adb06 {
+.bold.data-v-6df0c10a {
   font-weight: bold;
 }
-.lh.data-v-557adb06 {
+.lh.data-v-6df0c10a {
   line-height: 1;
 }
-.bfff.data-v-557adb06 {
+.bfff.data-v-6df0c10a {
   background: #fff;
 }
-view.data-v-557adb06, text.data-v-557adb06 {
+.colorffa.data-v-6df0c10a {
+  color: #FFA46C;
+}
+view.data-v-6df0c10a, text.data-v-6df0c10a {
   font-family: PingFang SC;
 }
 /* 字体大小 */
-.font36.data-v-557adb06 {
+.font36.data-v-6df0c10a {
   font-size: 36rpx;
 }
-.font32.data-v-557adb06 {
+.font32.data-v-6df0c10a {
   font-size: 32rpx;
 }
-.font28.data-v-557adb06 {
+.font28.data-v-6df0c10a {
   font-size: 28rpx;
 }
-.font24.data-v-557adb06 {
+.font24.data-v-6df0c10a {
   font-size: 24rpx;
 }
-.font26.data-v-557adb06 {
+.font26.data-v-6df0c10a {
   font-size: 26rpx;
 }
-.font30.data-v-557adb06 {
+.font30.data-v-6df0c10a {
   font-size: 30rpx;
 }
-.font50.data-v-557adb06 {
+.font50.data-v-6df0c10a {
   font-size: 50rpx;
 }
-.font500.data-v-557adb06 {
+.font500.data-v-6df0c10a {
   font-weight: 500;
 }
 /*其他*/
-.mb30.data-v-557adb06 {
+.mb30.data-v-6df0c10a {
   margin-bottom: 30rpx;
 }
-.mt30.data-v-557adb06 {
+.mt30.data-v-6df0c10a {
   margin-top: 30rpx;
 }
-.comm.data-v-557adb06 {
+.comm.data-v-6df0c10a {
   background-color: #F7F9FA;
   height: 100%;
   position: fixed;
   width: 100%;
   overflow: auto;
+}
+/*其他样式*/
+.commbtn.data-v-6df0c10a {
+  width: 690rpx;
+  line-height: 80rpx;
+  background: -webkit-linear-gradient(9deg, #6D99F8 0%, #3C66DF 100%);
+  background: linear-gradient(81deg, #6D99F8 0%, #3C66DF 100%);
+  box-shadow: 0px 5rpx 20rpx 0px rgba(209, 108, 77, 0.2);
+  border-radius: 10rpx;
+  margin: 0 auto;
+  margin-top: 80rpx;
 }
 /* 行为相关颜色 */
 /* 文字基本颜色 */
@@ -135,39 +149,47 @@ view.data-v-557adb06, text.data-v-557adb06 {
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.popbox.data-v-557adb06 {
-  background: rgba(0, 0, 0, 0.3);
-  width: 100%;
+.comm.data-v-6df0c10a {
+  background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  z-index: 9;
   top: 0;
-  left: 0;
-  z-index: 100;
-  overflow: hidden;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
-.popbox .popup.data-v-557adb06 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -280rpx;
-  margin-top: -276.5rpx;
-  width: 560rpx;
-  height: 316rpx;
-  background: #FFFFFF;
-  border-radius: 20rpx;
+.status_bar.data-v-6df0c10a {
+  height: 25px;
+  width: 100%;
+  height: 88rpx;
+  background: #fff;
 }
-.popbox .popup .poptitle.data-v-557adb06 {
-  margin: 60rpx 0 38rpx 0;
+.nickname.data-v-6df0c10a {
+  margin-left: 240rpx;
 }
-.popbox .popup .btn.data-v-557adb06 {
-  width: 560rpx;
-  height: 80rpx;
-  background: -webkit-linear-gradient(9deg, #6D99F8 0%, #3C66DF 100%);
-  background: linear-gradient(81deg, #6D99F8 0%, #3C66DF 100%);
-  border-radius: 0px 0px 20rpx 20rpx;
-  line-height: 80rpx;
-  margin-top: 79rpx;
+input.data-v-6df0c10a {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.person-nav.data-v-6df0c10a {
+  padding-left: 10rpx;
+  background: #fff;
+  padding-bottom: 27rpx;
+  box-sizing: border-box;
+  height: 100rpx;
+  padding-top: 30rpx;
+}
+.person-input.data-v-6df0c10a {
+  height: 88rpx;
+  padding: 30rpx 32rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+.person-input .keep.data-v-6df0c10a {
+  padding-left: 21rpx;
+  border-left: 1px solid #EEEEEE;
 }
 

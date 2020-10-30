@@ -1,6 +1,4 @@
 {
   "navigationStyle": "custom",
-  "usingComponents": {
-    "commoninput": "/components/commoninput/commoninput"
-  }
+  "usingComponents": {}
 }

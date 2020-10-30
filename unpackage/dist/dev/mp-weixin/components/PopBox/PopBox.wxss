@@ -81,6 +81,9 @@
 .bfff.data-v-e91cf1f8 {
   background: #fff;
 }
+.colorffa.data-v-e91cf1f8 {
+  color: #FFA46C;
+}
 view.data-v-e91cf1f8, text.data-v-e91cf1f8 {
   font-family: PingFang SC;
 }
@@ -122,6 +125,17 @@ view.data-v-e91cf1f8, text.data-v-e91cf1f8 {
   position: fixed;
   width: 100%;
   overflow: auto;
+}
+/*其他样式*/
+.commbtn.data-v-e91cf1f8 {
+  width: 690rpx;
+  line-height: 80rpx;
+  background: -webkit-linear-gradient(9deg, #6D99F8 0%, #3C66DF 100%);
+  background: linear-gradient(81deg, #6D99F8 0%, #3C66DF 100%);
+  box-shadow: 0px 5rpx 20rpx 0px rgba(209, 108, 77, 0.2);
+  border-radius: 10rpx;
+  margin: 0 auto;
+  margin-top: 80rpx;
 }
 /* 行为相关颜色 */
 /* 文字基本颜色 */

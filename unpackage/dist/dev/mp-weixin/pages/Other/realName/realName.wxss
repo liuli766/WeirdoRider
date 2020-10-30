@@ -81,6 +81,9 @@
 .bfff.data-v-14cc3b87 {
   background: #fff;
 }
+.colorffa.data-v-14cc3b87 {
+  color: #FFA46C;
+}
 view.data-v-14cc3b87, text.data-v-14cc3b87 {
   font-family: PingFang SC;
 }
@@ -123,6 +126,17 @@ view.data-v-14cc3b87, text.data-v-14cc3b87 {
   width: 100%;
   overflow: auto;
 }
+/*其他样式*/
+.commbtn.data-v-14cc3b87 {
+  width: 690rpx;
+  line-height: 80rpx;
+  background: -webkit-linear-gradient(9deg, #6D99F8 0%, #3C66DF 100%);
+  background: linear-gradient(81deg, #6D99F8 0%, #3C66DF 100%);
+  box-shadow: 0px 5rpx 20rpx 0px rgba(209, 108, 77, 0.2);
+  border-radius: 10rpx;
+  margin: 0 auto;
+  margin-top: 80rpx;
+}
 /* 行为相关颜色 */
 /* 文字基本颜色 */
 /* 背景颜色 */
@@ -135,6 +149,20 @@ view.data-v-14cc3b87, text.data-v-14cc3b87 {
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.status_bar.data-v-14cc3b87 {
+  height: 25px;
+  width: 100%;
+  height: 88rpx;
+  background: #fff;
+}
+.person-nav.data-v-14cc3b87 {
+  padding-left: 10rpx;
+  background: #fff;
+  padding-bottom: 27rpx;
+  box-sizing: border-box;
+  height: 100rpx;
+  padding-top: 30rpx;
+}
 .comm .real-tit.data-v-14cc3b87 {
   padding: 30rpx;
 }
@@ -178,5 +206,19 @@ input.data-v-14cc3b87 {
 }
 .meun-name .meun text.data-v-14cc3b87:hover {
   background: #F7F9FA;
+}
+.cardtit.data-v-14cc3b87 {
+  margin: 20rpx 32rpx 32rpx 32rpx;
+}
+.cardbox.data-v-14cc3b87 {
+  padding: 30rpx;
+}
+.cardbox image.data-v-14cc3b87 {
+  margin-bottom: 16rpx;
+  width: 330rpx;
+  height: 200rpx;
+}
+.nickname.data-v-14cc3b87 {
+  margin-left: 240rpx;
 }
 
