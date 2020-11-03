@@ -113,6 +113,12 @@ view.data-v-891c2434, text.data-v-891c2434 {
   font-weight: 500;
 }
 /*其他*/
+.ml.data-v-891c2434 {
+  margin-left: 30rpx;
+}
+.mr.data-v-891c2434 {
+  margin-right: 30rpx;
+}
 .mb30.data-v-891c2434 {
   margin-bottom: 30rpx;
 }
@@ -180,7 +186,7 @@ view.data-v-891c2434, text.data-v-891c2434 {
   position: relative;
 }
 .login-box .form input.data-v-891c2434 {
-  text-align: center;
+  text-align: right;
 }
 .login-box .form .login-btn.data-v-891c2434 {
   width: 690rpx;

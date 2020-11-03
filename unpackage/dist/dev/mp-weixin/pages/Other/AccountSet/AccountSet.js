@@ -8,66 +8,148 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var comminput = function comminput() {__webpack_require__.e(/*! require.ensure | components/personInput */ "components/personInput").then((function () {return resolve(__webpack_require__(/*! @/components/personInput.vue */ 187));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 {
+  components: {
+    comminput: comminput },
+
   data: function data() {
     return {
       headimg: "",
-      usersetList: [
-      {
+      selectId: '', //当前选中的下标
+      usersetList: [{
         name: '昵称',
-        placeholder: '我是一名小保安' },
+        placeholder: '' },
 
       {
         name: '真实姓名',
-        placeholder: '王小二' },
+        placeholder: '' },
 
       {
         name: '手机号码',
-        placeholder: '13000000000' },
+        placeholder: '' },
 
       {
         name: '登录密码',
-        placeholder: '**********' }] };
+        placeholder: '' }] };
 
 
 
   },
+  watch: {
+    usersetList: function usersetList() {
+      this.person();
+    } },
+
+  onLoad: function onLoad() {
+    this.person();
+  },
+  computed: _objectSpread({},
+  (0, _vuex.mapState)({
+    userId: function userId(state) {return state.userId;},
+    iscomminput: function iscomminput(state) {return state.iscomminput;} })),
+
+
   methods: {
-    UploadHeadimg: function UploadHeadimg() {
+    handConfirm: function handConfirm() {//确定修改资料
+      var user_name = this.usersetList[0].placeholder; //用户昵称
+      var mobile = this.usersetList[2].placeholder; //手机号
+      var password = this.usersetList[3].placeholder; //登录密码
+      var that = this;
+      var params = {
+        user_id: this.userId,
+        user_name: user_name,
+        mobile: mobile,
+        password: password,
+        head_img: this.headimg };
+
+      that.request.getdata('getUserSave', params).then(function (res) {
+        console.log(res, '修改资料');
+        uni.showToast({
+          title: res.msg,
+          icon: 'none',
+          duration: 3000 });
+
+      });
+    },
+    GoComminput: function GoComminput(i) {
+      this.selectId = i;
+      this.$store.commit("Showcomminput", true);
+    },
+    handKeep: function handKeep(data) {var _this = this; //账户设置内容
+      this.usersetList.map(function (item, i) {
+        if (_this.selectId == i) {
+          item.placeholder = data;
+        }
+      });
+    },
+    UploadHeadimg: function UploadHeadimg() {//上传头像
       var that = this;
       uni.chooseImage({
         count: 1, //默认9
         sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album'], //从相册选择
         success: function success(res) {
-          that.headimg = res.tempFilePaths;
+          that.headimg = res.tempFilePaths[0];
           console.log(JSON.stringify(res.tempFilePaths));
         } });
+
+    },
+    back: function back() {//返回上一级
+      uni.navigateBack({
+        delta: 1 });
+
+    },
+    person: function person() {var _this2 = this;
+      var that = this;
+      var params = {
+        user_id: this.userId };
+
+      that.request.getdata('getUserInfo', params).then(function (res) {
+        console.log(res, '骑手中心');
+        _this2.headimg = res.data.head_img;
+        _this2.usersetList[0].placeholder = res.data.user_name;
+        _this2.usersetList[1].placeholder = res.data.real_name;
+        _this2.usersetList[2].placeholder = res.data.mobile;
+      });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

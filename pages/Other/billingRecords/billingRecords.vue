@@ -33,6 +33,9 @@
 </template>
 
 <script>
+	import {
+		mapState,
+	} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -41,12 +44,32 @@
 				indicatorLineLeft: 162
 			}
 		},
+		computed: {
+			...mapState({
+				userId: (state) => state.userId,
+			}),
+		},
+		onLoad() {
+			this.getUserBonus(1)
+		},
 		methods: {
 			handNavSweich(i, e) {
 				this.navIndex = i
 				var offsetX = e.currentTarget.offsetLeft
 				var pageX = e.detail.x
 				this.indicatorLineLeft = offsetX + pageX
+				this.getUserBonus(i+1)
+			},
+			getUserBonus(type){
+				let that = this
+				let params = {
+					user_id: this.userId,
+					type,
+					page:1
+				}
+				that.request.getdata('getUserBonus', params).then(res => {
+					console.log(res, '账单记录')
+				})
 			}
 		}
 	}

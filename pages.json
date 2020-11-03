@@ -32,7 +32,8 @@
 				"navigationStyle": "custom"
 			}
 		}
-	],
+	    
+    ],
 	"subPackages": [{
 			"root": "pages/Detail",
 			"pages": [{
@@ -64,7 +65,7 @@
 			"pages": [{
 					"path": "AccountSet/AccountSet",
 					"style": {
-						"navigationBarTitleText": "账户设置"
+						"navigationStyle": "custom"
 					}
 				}, {
 					"path": "personInput/personInput",
@@ -116,6 +117,7 @@
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/TabBar/Home/Home",
+				"iconPath": "static/img/tabar1.png",
 				"selectedIconPath": "static/img/tabar1act.png",
 				"text": "首页"
 			},

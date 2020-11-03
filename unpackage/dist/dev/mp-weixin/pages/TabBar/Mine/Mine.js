@@ -130,51 +130,272 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+
 {
   data: function data() {
-    return {};
+    var date = new Date();
+    var hours = [];
+    var hour = date.getHours();
+    var minus = [];
+    var minu = date.getMinutes();
+    for (var i = 0; i < date.getHours(); i++) {
+      hours.push(i);
+    }
+    for (var _i = 0; _i < date.getMinutes(); _i++) {
+      minus.push(_i);
+    }
+    return {
+      isShowPop: false,
+      CancelList: [], //区域列表
+      isShowList: false, // 是否显示列表框
+      selectText: [], //选中的文字
+      isshowtime: false, //时间弹框
+      title: 'picker-view',
+      hours: hours,
+      hour: hour,
+      minus: minus,
+      minu: minu,
+      newbefortime: '', //开始时间
+      newaftertime: '', //结束时间
+      suretime: '', //input确定时间
+      value: [60, hour - 1, minu - 1],
+      personInfo: {} //个人信息
+    };
+  },
+  computed: _objectSpread({},
+  (0, _vuex.mapState)({
+    userId: function userId(state) {return state.userId;},
+    userReal: function userReal(state) {return state.userReal;} })),
 
 
+  onLoad: function onLoad() {var _this = this;
+    var that = this;
+    var params = {
+      user_id: this.userId };
+
+    that.request.getdata('getSchoolList').then(function (res) {//区域列表
+      for (var i = 0; i < res.data.length; i++) {
+        res.data[i].isCheck = false;
+      }
+      _this.CancelList = res.data;
+      console.log(_this.CancelList, '区域列表');
+    });
+    that.request.getdata('getUserInfo', params).then(function (res) {
+      console.log(res, '骑手中心');
+      _this.personInfo = res.data;
+    });
   },
   methods: {
+    listBoxHeight: function listBoxHeight() {// 列表框的总高度
+      var itemHeight = 80; // 每个列表项的高度(upx)
+      return this.CancelList.length * itemHeight;
+    },
+    onClickItem: function onClickItem(item, i) {//多选
+      item.isCheck = !item.isCheck;
+      if (item.isCheck) {
+        this.selectText.push(item.name);
+      } else {
+        this.selectText.pop(item.name);
+      }
+      console.log(this.selectText);
+    },
+    OnInput: function OnInput() {//显示下拉列表框
+      this.isShowList = true;
+    },
+    WorkSet: function WorkSet() {//打开整个弹框
+      this.isShowPop = true;
+    },
+    handcancel: function handcancel() {var _this2 = this; //区域取消
+      this.isShowList = false;
+      this.selectText = [];
+      this.CancelList.map(function (item, i) {
+        _this2.CancelList[i].isCheck = false;
+      });
+    },
+    handconfirm: function handconfirm() {//区域确定
+      this.isShowList = false;
+    },
+    handShowTime: function handShowTime() {//显示时间弹框
+      this.isshowtime = true;
+    },
+    bindChangeday: function bindChangeday(e) {
+      var val = e.detail.value;
+      this.hour = this.hours[val[0]];
+      this.minu = this.minus[val[1]];
+      var hour = this.hours[val[0]];
+      var minu = this.minus[val[1]];
+      this.newbefortime = hour + ':' + minu;
+    },
+    bindChangeday1: function bindChangeday1(e) {
+      var val = e.detail.value;
+      this.hour = this.hours[val[0]];
+      this.minu = this.minus[val[1]];
+      var hour = this.hours[val[0]];
+      var minu = this.minus[val[1]];
+      this.newaftertime = hour + ':' + minu;
+    },
+    Canceltimepop: function Canceltimepop() {//关闭时间弹窗
+      this.isshowtime = false;
+    },
+    Confirmtimepop: function Confirmtimepop() {//确定时间弹窗
+      console.log(this.newaftertime == '', 'dsasds');
+      if (this.newaftertime == '' || this.newbefortime == '') {
+        uni.showToast({
+          title: '请选择时间',
+          icon: 'none',
+          duration: 2000 });
+
+        return false;
+      } else {
+        this.suretime = this.newbefortime + '-' + this.newaftertime;
+        this.isshowtime = false;
+      }
+      console.log(this.suretime);
+    },
+    handCommConfirm: function handCommConfirm() {//工作设置
+      var that = this;
+      var region = this.selectText.toString();
+      var params = {
+        user_id: this.userId,
+        region: region,
+        start_time: this.newbefortime,
+        end_time: this.newaftertime };
+
+      if (region.length == 0) {
+        uni.showToast({
+          title: '请选择区域',
+          icon: 'none',
+          duration: 2000 });
+
+        return false;
+      }
+      if (this.newaftertime == '' || this.newbefortime == '') {
+        uni.showToast({
+          title: '请选择时间',
+          icon: 'none',
+          duration: 2000 });
+
+        return false;
+      }
+      that.request.getdata('getSettingWork', params).then(function (res) {
+        console.log(res, '工作设置');
+        uni.showToast({
+          title: res.msg,
+          icon: 'none',
+          duration: 2000 });
+
+      });
+      this.isShowPop = false;
+    },
+    handcancelPop: function handcancelPop() {//关闭整个弹窗
+      this.isShowPop = false;
+    },
     GoAccountSet: function GoAccountSet() {
       uni.navigateTo({
         url: '../../Other/AccountSet/AccountSet' });

@@ -5,11 +5,11 @@
 		</view>
 		<view class="mb30 flex person-nav">
 			<view class="iconfont icon-iconfont-left font50" @tap="handback" style="color: #333333 !important;"></view>
-			<view class="nickname"></view>
+			<view class="nickname">{{userinfoList.name}}</view>
 		</view>
 		<view class="person-input mt30 flex flex_al-cen font500 font30 color666">
-			<input type="text" v-model="username"  />
-			<text class="keep" @tap="handKeep()">保存</text>
+			<input type="text"   v-model="userinfoList.placeholder"/>
+			<text class="keep" @tap="handKeep(userinfoList)">保存</text>
 		</view>
 
 	</view>
@@ -22,15 +22,25 @@
 	} from 'vuex';
 	export default {
 		props:{
-			username:{
-				type:String,
-				default:''
+			userinfoList:{
+				type:Object,
+				default: function() {
+					return {}
+				}
+			},
+			idNum:{
+				type:Number,
+				default:0
 			}
 		},
 		data() {
 			return {
 				show: false,
+				
 			}
+		},
+		onLoad() {
+			console.log(this.userinfoList)
 		},
 		computed: {
 			...mapState({
@@ -41,9 +51,9 @@
 			handback() {
 				this.$store.commit("Showcomminput", false);
 			},
-			handKeep(){
-				this.$emit('Gusername',this.username);
-				console.log(this.username)
+			handKeep(item){
+				this.$emit('handKeep',item.placeholder);
+				console.log(item.placeholder)
 				this.$store.commit("Showcomminput", false);
 			}
 		}

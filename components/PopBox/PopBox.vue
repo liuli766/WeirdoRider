@@ -8,7 +8,7 @@
 				<slot name="btnpop"></slot>
 			</view>
 			<slot name="img">
-				<image src="../../static/img/close.png" mode="" class="close" @tap="Close"></image>
+				<image src="../../static/img/close.png" mode="" class="close" @tap.stop="Close"></image>
 			</slot>
 		</view>
 	</view>
@@ -24,29 +24,46 @@
 				
 			}
 		},
+		props:{
+			detail:{
+				type:[Object,Array],
+				default: function() {
+					return {}
+				}
+			},
+			pick:{
+				type:[Object,Array],
+				default: function() {
+					return {}
+				}
+			}
+		},
 		computed: {
 		    ...mapState({
 				isPop: (state) => state.isPop,
+				order: (state) => state.order,
 			}),
 		},
 		methods: {
 			Close(){
 				this.$store.commit("showPop", false);
-			}
+			},
+			Pickup(lat, log, name) {
+				this.$emit('ChildPickup',lat, log, name)
+			},
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.popbox{
-		background: rgba(0,0,0,.3);
-		width: 100%;
-		height: 100%;
 		position: fixed;
 		top: 0;
 		left: 0;
-		z-index: 100;
-		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,.5);
+		z-index: 10;
 		.popup{
 			position: absolute;
 			top: 50%;
@@ -71,6 +88,18 @@
 			}
 		}
 	}
-	
+	.successtxt {
+		margin: 42upx 0 20upx 0;
+	}
+	.btnpop {
+		width: 500upx;
+		height: 80upx;
+		background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
+		box-shadow: 1upx 5upx 20upx 0px rgba(209, 109, 78, 0.2);
+		border-radius: 10upx;
+		line-height: 80upx;
+		margin: 0 auto;
+		margin-top: 60upx;
+	}
 	
 </style>

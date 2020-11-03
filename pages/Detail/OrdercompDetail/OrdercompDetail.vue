@@ -1,21 +1,21 @@
 <template>
 	<view class="detail comm">
 		<view class="page-item">
-			<ordercomplted class="page-item">
+			<ordercomplted class="page-item" :orderList='detail'>
 				<text class="color3434 bold font32" slot='tit'>订单已完成</text>
 				<view class="evaluate font500 font24 text_cen" slot='stay'>待评价</view>
-				<text class="color333 font26 font500" slot='concat' @tap.stop='Concat'>联系商家</text>
+				<text class="color333 font26 font500" slot='concat' @tap.stop='Concat(detail.supplier_mobile)'>联系商家</text>
 			</ordercomplted>
 		</view>
 		<view class="information  font28  font500">
 			<view class="color333 bold font32 title">订单信息</view>
 			<view class="flex  flex_be flex_al-cen infor-list">
 				<text class="color333">订单编号</text>
-				<text class="color666">FKMW202009171838</text>
+				<text class="color666">{{detail.order_sn}}</text>
 			</view>
 			<view class="flex  flex_be flex_al-cen infor-list">
 				<text class="color333">下单时间</text>
-				<text class="color666">2020-09-18 14:25:36</text>
+				<text class="color666">{{detail.pay_time}}</text>
 			</view>
 		</view>
 		<view class="color666 font24 font500 infor-tousu">
@@ -23,7 +23,7 @@
 			<text style="color: #5D82FF;">提起申诉</text>
 		</view>
 		<view class="flex text_cen">
-			<view class="sjbtn font500">联系顾客</view>
+			<view class="sjbtn font500" @tap.stop='Concat(detail.user_mobile)'>联系顾客</view>
 			<view class="gkbtn colorfff font500">待用户评价</view>
 		</view>
 		<concatpop v-if="isConcatPop"/>
@@ -49,11 +49,13 @@
 		computed: {
 		    ...mapState({
 				isPop: (state) => state.isPop,
-				isConcatPop:(state) => state.isConcatPop
+				isConcatPop:(state) => state.isConcatPop,
+				tel: (state) => state.tel,
 			}),
 		},
 		methods: {
-			Concat(){
+			Concat(phone){
+				this.$store.commit('Call',phone)
 				this.$store.commit("showConcatPop", true);
 			}
 		}

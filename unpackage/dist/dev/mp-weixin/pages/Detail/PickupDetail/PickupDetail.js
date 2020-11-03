@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -171,7 +171,33 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ordercomplted = function ordercomplted() {__webpack_require__.e(/*! require.ensure | components/OrderCompleted/OrderCompleted */ "components/OrderCompleted/OrderCompleted").then((function () {return resolve(__webpack_require__(/*! @/components/OrderCompleted/OrderCompleted.vue */ 165));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var concatpop = function concatpop() {__webpack_require__.e(/*! require.ensure | components/ConcatPop/ConcatPop */ "components/ConcatPop/ConcatPop").then((function () {return resolve(__webpack_require__(/*! @/components/ConcatPop/ConcatPop.vue */ 172));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Pop = function Pop() {__webpack_require__.e(/*! require.ensure | components/PopBox/PopBox */ "components/PopBox/PopBox").then((function () {return resolve(__webpack_require__(/*! @/components/PopBox/PopBox.vue */ 158));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ordercomplted = function ordercomplted() {__webpack_require__.e(/*! require.ensure | components/OrderCompleted/OrderCompleted */ "components/OrderCompleted/OrderCompleted").then((function () {return resolve(__webpack_require__(/*! @/components/OrderCompleted/OrderCompleted.vue */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var concatpop = function concatpop() {__webpack_require__.e(/*! require.ensure | components/ConcatPop/ConcatPop */ "components/ConcatPop/ConcatPop").then((function () {return resolve(__webpack_require__(/*! @/components/ConcatPop/ConcatPop.vue */ 180));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Pop = function Pop() {__webpack_require__.e(/*! require.ensure | components/PopBox/PopBox */ "components/PopBox/PopBox").then((function () {return resolve(__webpack_require__(/*! @/components/PopBox/PopBox.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 {
@@ -181,23 +207,93 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
     Pop: Pop },
 
   data: function data() {
-    return {};
-
+    return {
+      detail: [], //详情
+      CancelList: [], //骑手理由订单
+      isShowList: false, // 是否显示列表框
+      selectText: '', // 已经选择的内容
+      isShowPop: false, //取消订单弹框
+      NoteText: '' };
 
   },
   computed: _objectSpread({},
   (0, _vuex.mapState)({
     isPop: function isPop(state) {return state.isPop;},
-    isConcatPop: function isConcatPop(state) {return state.isConcatPop;} })),
+    isConcatPop: function isConcatPop(state) {return state.isConcatPop;},
+    userId: function userId(state) {return state.userId;},
+    tel: function tel(state) {return state.tel;} })),
 
 
+  onLoad: function onLoad(option) {var _this = this;
+    console.log(option);
+    var that = this;
+    var params = {
+      order_id: option.id };
+
+    that.request.getdata('getOrderInfo', params).then(function (res) {
+      _this.detail = res.data;
+      console.log(res, '详情');
+    });
+    that.request.getdata('getCancelList').then(function (res) {
+      _this.CancelList = res.data;
+      console.log(res, '取消订单理由');
+    });
+  },
   methods: {
-    Concat: function Concat() {
+    Concat: function Concat(phone) {
+      this.$store.commit('Call', phone);
       this.$store.commit("showConcatPop", true);
     },
     Goods: function Goods() {
       this.$store.commit("showPop", true);
+    },
+    getCancel: function getCancel() {//取消订单按钮
+      this.isShowPop = true;
+    },
+    handcancel: function handcancel() {//取消
+      this.isShowPop = false;
+    },
+    handconfirm: function handconfirm(item) {//确认取消订单
+      console.log(item, '确认取消订单');
+      var that = this;
+      var params = {
+        order_id: item.id,
+        user_id: this.userId };
+
+      if (this.selectText !== '') {
+        that.request.getdata('getCancel', params).then(function (res) {
+          console.log(res, '取消订单');
+          uni.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 3000 });
+
+        });
+        this.isShowPop = false;
+      } else {
+        uni.showToast({
+          title: '请填写理由',
+          icon: 'none',
+          duration: 3000 });
+
+      }
+
+    },
+    listBoxHeight: function listBoxHeight() {// 列表框的总高度
+      var itemHeight = 80; // 每个列表项的高度(upx)
+      return this.CancelList.length * itemHeight;
+    },
+    Oninput: function Oninput() {//显示列表框
+      this.isShowList = true;
+    },
+    onClickItem: function onClickItem(item) {// 列表项上的点击事件
+      this.selectText = item.name;
+      this.isShowList = false;
+    },
+    Close: function Close() {
+      this.$store.commit("showPop", false);
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

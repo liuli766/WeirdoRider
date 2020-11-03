@@ -113,6 +113,12 @@ view.data-v-c1799e00, text.data-v-c1799e00 {
   font-weight: 500;
 }
 /*其他*/
+.ml.data-v-c1799e00 {
+  margin-left: 30rpx;
+}
+.mr.data-v-c1799e00 {
+  margin-right: 30rpx;
+}
 .mb30.data-v-c1799e00 {
   margin-bottom: 30rpx;
 }

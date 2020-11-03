@@ -44,6 +44,7 @@
     "list": [
       {
         "pagePath": "pages/TabBar/Home/Home",
+        "iconPath": "static/img/tabar1.png",
         "selectedIconPath": "static/img/tabar1act.png",
         "text": "首页"
       },

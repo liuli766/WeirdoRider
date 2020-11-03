@@ -113,6 +113,12 @@ view.data-v-fc24dfac, text.data-v-fc24dfac {
   font-weight: 500;
 }
 /*其他*/
+.ml.data-v-fc24dfac {
+  margin-left: 30rpx;
+}
+.mr.data-v-fc24dfac {
+  margin-right: 30rpx;
+}
 .mb30.data-v-fc24dfac {
   margin-bottom: 30rpx;
 }

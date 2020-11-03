@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -179,29 +179,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var comminput = function comminput() {__webpack_require__.e(/*! require.ensure | components/personInput */ "components/personInput").then((function () {return resolve(__webpack_require__(/*! @/components/personInput.vue */ 179));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var comminput = function comminput() {__webpack_require__.e(/*! require.ensure | components/personInput */ "components/personInput").then((function () {return resolve(__webpack_require__(/*! @/components/personInput.vue */ 187));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 {
@@ -212,16 +190,131 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
     return {
       isDownmeun: false,
       sex: ['男', '女'],
-      gender: '男',
-      username: '王小二' };
+      gender: '',
+      selectId: '', //当前选中的下标
+      face_img: '', //身份证正面照文件
+      back_img: '', //身份证反面照文件
+      usersetList: [{
+        name: '姓名',
+        placeholder: '' },
+
+      {
+        name: '身份证号',
+        placeholder: '' },
+
+      {
+        name: '性别',
+        placeholder: '' },
+
+      {
+        name: '专业',
+        placeholder: '' },
+
+      {
+        name: '学号',
+        placeholder: '' }] };
+
+
 
   },
   computed: _objectSpread({},
   (0, _vuex.mapState)({
-    iscomminput: function iscomminput(state) {return state.iscomminput;} })),
+    iscomminput: function iscomminput(state) {return state.iscomminput;},
+    userId: function userId(state) {return state.userId;},
+    userReal: function userReal(state) {return state.userReal;} })),
 
 
   methods: {
+    handConfirm: function handConfirm() {var _this = this; //确定修改资料
+      var name = this.usersetList[0].placeholder; //姓名
+      var number = this.usersetList[1].placeholder; //身份证号
+      var study_type = this.usersetList[3].placeholder; //专业
+      var study_num = this.usersetList[4].placeholder; //学号
+      var sex = '';
+      this.gender == '男' && (sex = 1);
+      this.gender == '女' && (sex = 2);
+      var that = this;
+      var params = {
+        user_id: this.userId,
+        name: name,
+        number: number,
+        sex: sex,
+        study_type: study_type,
+        study_num: study_num,
+        face_img: this.face_img,
+        back_img: this.back_img };
+
+
+      // let imgs = [
+      // 	{
+      // 		name: "face_img", 
+      // 		uri: this.face_img
+      // 	},{
+      // 		name: "back_img", 
+      // 		uri: this.back_img
+      // 	}
+      // ]
+      // console.log(that.request.base+'/Rider/userReal')
+      // uni.uploadFile({
+      //     url:that.request.base+'/Rider/userReal', 
+      //     files:imgs,
+      // 	filePath: this.back_img, // uni.chooseImage函数调用后获取的本地文件路劲
+      // 	name:'file', 
+      //     formData: JSON.stringify(params),
+      //     header:{"Content-Type": "multipart/form-data"},
+      // 	success: (res) => {
+      // 		console.log(res)
+      // 	},
+      // 	fail: (res) => {
+      // 	    console.log(res)
+      // 	}
+      // })
+      that.request.getdata('getUserReal', params).then(function (res) {
+        console.log(res, '实名认证');
+        _this.$store.commit('handuserReal', res.is_real);
+        uni.showToast({
+          title: res.msg,
+          icon: 'none',
+          duration: 3000 });
+
+      });
+    },
+    GoComminput: function GoComminput(i) {
+      this.selectId = i;
+      this.$store.commit("Showcomminput", true);
+    },
+    handKeep: function handKeep(data) {var _this2 = this; //实名认证内容
+      this.usersetList.map(function (item, i) {
+        if (_this2.selectId == i) {
+          item.placeholder = data;
+        }
+      });
+      console.log(this.usersetList);
+    },
+    UploadFace_img: function UploadFace_img() {//上传身份证正面照文件
+      var that = this;
+      uni.chooseImage({
+        count: 1, //默认9
+        sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album'], //从相册选择
+        success: function success(res) {
+          that.face_img = res.tempFilePaths[0];
+          console.log(JSON.stringify(res.tempFilePaths));
+        } });
+
+    },
+    UploadBack_img: function UploadBack_img() {//上传身份证背面照文件
+      var that = this;
+      uni.chooseImage({
+        count: 1, //默认9
+        sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album'], //从相册选择
+        success: function success(res) {
+          that.back_img = res.tempFilePaths[0];
+          console.log(JSON.stringify(res.tempFilePaths));
+        } });
+
+    },
     handDownmeun: function handDownmeun() {
       this.isDownmeun = true;
     },
@@ -229,12 +322,12 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
       this.gender = gender;
       this.isDownmeun = false;
     },
-    GOpersonInput: function GOpersonInput() {
-      this.$store.commit("Showcomminput", true);
-    },
-    Gusername: function Gusername(data) {
-      console.log(data);
+    back: function back() {//返回上一级
+      uni.navigateBack({
+        delta: 1 });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

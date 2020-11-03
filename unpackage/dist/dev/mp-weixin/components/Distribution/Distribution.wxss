@@ -113,6 +113,12 @@ view.data-v-57f70ff8, text.data-v-57f70ff8 {
   font-weight: 500;
 }
 /*其他*/
+.ml.data-v-57f70ff8 {
+  margin-left: 30rpx;
+}
+.mr.data-v-57f70ff8 {
+  margin-right: 30rpx;
+}
 .mb30.data-v-57f70ff8 {
   margin-bottom: 30rpx;
 }
@@ -184,14 +190,5 @@ view.data-v-57f70ff8, text.data-v-57f70ff8 {
 }
 .content .bottom .colorred .font12.data-v-57f70ff8 {
   font-size: 12rpx;
-}
-.content .bottom .btn.data-v-57f70ff8 {
-  width: 200rpx;
-  height: 60rpx;
-  background: -webkit-linear-gradient(9deg, #6E9AF8 0%, #3C66DF 100%);
-  background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
-  box-shadow: 1rpx 5rpx 20rpx 0rpx rgba(209, 109, 78, 0.2);
-  border-radius: 30rpx;
-  line-height: 60rpx;
 }
 

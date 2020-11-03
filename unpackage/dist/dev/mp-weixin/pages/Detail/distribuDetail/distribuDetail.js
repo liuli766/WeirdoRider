@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -163,7 +163,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ordercomplted = function ordercomplted() {__webpack_require__.e(/*! require.ensure | components/OrderCompleted/OrderCompleted */ "components/OrderCompleted/OrderCompleted").then((function () {return resolve(__webpack_require__(/*! @/components/OrderCompleted/OrderCompleted.vue */ 165));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Pop = function Pop() {__webpack_require__.e(/*! require.ensure | components/PopBox/PopBox */ "components/PopBox/PopBox").then((function () {return resolve(__webpack_require__(/*! @/components/PopBox/PopBox.vue */ 158));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ordercomplted = function ordercomplted() {__webpack_require__.e(/*! require.ensure | components/OrderCompleted/OrderCompleted */ "components/OrderCompleted/OrderCompleted").then((function () {return resolve(__webpack_require__(/*! @/components/OrderCompleted/OrderCompleted.vue */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Pop = function Pop() {__webpack_require__.e(/*! require.ensure | components/PopBox/PopBox */ "components/PopBox/PopBox").then((function () {return resolve(__webpack_require__(/*! @/components/PopBox/PopBox.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 {
@@ -172,14 +173,27 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
     Pop: Pop },
 
   data: function data() {
-    return {};
+    return {
+      detail: [] //详情
+    };
+  },
+  onLoad: function onLoad(option) {var _this = this;
+    console.log(option);
+    var that = this;
+    var params = {
+      order_id: option.id };
 
-
+    that.request.getdata('getOrderInfo', params).then(function (res) {
+      _this.detail = res.data;
+      console.log(res, '详情');
+    });
   },
   computed: _objectSpread({},
   (0, _vuex.mapState)({
     isPop: function isPop(state) {return state.isPop;},
-    isConcatPop: function isConcatPop(state) {return state.isConcatPop;} })),
+    isConcatPop: function isConcatPop(state) {return state.isConcatPop;},
+    userId: function userId(state) {return state.userId;},
+    order: function order(state) {return state.order;} })),
 
 
   methods: {
@@ -189,9 +203,28 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
     Goods: function Goods() {
       this.$store.commit("showPop", true);
     },
-    GunList: function GunList() {
+    GunList: function GunList(item) {//抢单
       this.$store.commit("showPop", true);
+      var that = this;
+      var params = {
+        order_id: item.id,
+        user_id: this.userId };
+
+      that.request.getdata('getOrderGrabbing', params).then(function (res) {
+        console.log(res, '抢单');
+        res.code == 300 && uni.showToast({
+          title: '抢单失败',
+          icon: 'none',
+          duration: 3000 });
+
+      });
+    },
+    Pickup: function Pickup(lat, log, name) {//前往取货
+      var that = this;
+      that.map.map(lat, log, name);
+      this.$store.commit("showPop", false);
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

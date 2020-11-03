@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -189,7 +189,7 @@ var _default =
 {
   data: function data() {
     return {
-      isDownmeun: false,
+      isDownmeun: false, //是否显示性别下拉框
       sex: ['男', '女'],
       showClearIcon: false,
       userinfo: {
@@ -204,66 +204,106 @@ var _default =
 
   },
   methods: {
-    formSubmit: function formSubmit(e) {
+    formSubmit: function formSubmit(e) {//注册
+      var sex = '';
+      this.userinfo.sex == '男' && (sex = 1);
+      this.userinfo.sex == '女' && (sex = 2);
+
       var params = {
         name: this.userinfo.name,
-        sex: this.userinfo.sex,
+        sex: sex,
         major: this.userinfo.major,
         study_num: this.userinfo.study_num,
         mobile: this.userinfo.mobile,
         password: this.userinfo.password,
         surepwd: this.userinfo.surepwd };
 
-      // if(!this.userinfo.name){
-      // 	uni.showToast({ title: '姓名不能为空', icon: "none" });
-      // 	return false;
-      // }
-      // if(!this.userinfo.sex){
-      // 	uni.showToast({ title: '请选择性别', icon: "none" });
-      // 	return false;
-      // }
-      // if(!this.userinfo.major){
-      // 	uni.showToast({ title: '专业不能为空', icon: "none" });
-      // 	return false;
-      // }
-      // if(!this.userinfo.study_num){
-      // 	uni.showToast({ title: '学号不能为空', icon: "none" });
-      // 	return false;
-      // }
-      // if(!this.userinfo.mobile){
-      // 	uni.showToast({ title: '手机号码不能为空', icon: "none" });
-      // 	return false;
-      // }
-      // if(!/^[0-9][1-9]{10}$/.test(this.userinfo.mobile)){
-      // 	uni.showToast({ title: '手机号码格式不正确', icon: "none" });
-      // 	return false;
-      // }
-      // if(!this.userinfo.password){
-      // 	uni.showToast({ title: '密码不能为空', icon: "none" });
-      // 	return false;
-      // }
-      // if(!this.userinfo.surepwd){
-      // 	uni.showToast({ title: '确认密码不能为空', icon: "none" });
-      // 	return false;
-      // }
-      // if(this.userinfo.password!==this.userinfo.surepwd){
-      // 	uni.showToast({ title: '两次密码输入不一致', icon: "none" });
-      // 	return false;
-      // }
+      if (!this.userinfo.name) {
+        uni.showToast({
+          title: '姓名不能为空',
+          icon: "none" });
+
+        return false;
+      }
+      if (!this.userinfo.sex) {
+        uni.showToast({
+          title: '请选择性别',
+          icon: "none" });
+
+        return false;
+      }
+      if (!this.userinfo.major) {
+        uni.showToast({
+          title: '专业不能为空',
+          icon: "none" });
+
+        return false;
+      }
+      if (!this.userinfo.study_num) {
+        uni.showToast({
+          title: '学号不能为空',
+          icon: "none" });
+
+        return false;
+      }
+      if (!this.userinfo.mobile) {
+        uni.showToast({
+          title: '手机号码不能为空',
+          icon: "none" });
+
+        return false;
+      }
+      if (!/^[0-9][1-9]{10}$/.test(this.userinfo.mobile)) {
+        uni.showToast({
+          title: '手机号码格式不正确',
+          icon: "none" });
+
+        return false;
+      }
+      if (!this.userinfo.password) {
+        uni.showToast({
+          title: '密码不能为空',
+          icon: "none" });
+
+        return false;
+      }
+      if (!this.userinfo.surepwd) {
+        uni.showToast({
+          title: '确认密码不能为空',
+          icon: "none" });
+
+        return false;
+      }
+      if (this.userinfo.password !== this.userinfo.surepwd) {
+        uni.showToast({
+          title: '两次密码输入不一致',
+          icon: "none" });
+
+        return false;
+      }
 
       var that = this;
-      console.log(e);
       that.request.getdata('getRegister', params).then(function (res) {
         console.log(res);
+        uni.showToast({
+          title: res.msg,
+          icon: 'none',
+          duration: 3000 });
+
+        uni.navigateTo({
+          url: '../login/login',
+          success: function success(res) {}, fail: function fail() {}, complete: function complete() {} });
+
       });
     },
-    handSex: function handSex(gender) {
+    handSex: function handSex(gender) {//选择性别
       this.userinfo.sex = gender;
       this.isDownmeun = false;
     },
-    handDownmeun: function handDownmeun() {
+    handDownmeun: function handDownmeun() {//显示性别下拉框
       this.isDownmeun = true;
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

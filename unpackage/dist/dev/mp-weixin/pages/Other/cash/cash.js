@@ -130,55 +130,108 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+
 {
   data: function data() {
     return {
-      isPop: false };
+      isPop: false, //提现成功显示框
+      money: '' //提现金额
+    };
+  },
+  computed: _objectSpread({},
+  (0, _vuex.mapState)({
+    userId: function userId(state) {return state.userId;} })),
+
+
+  onLoad: function onLoad() {
 
   },
-  methods: {} };exports.default = _default;
+  methods: {
+    getFindBank: function getFindBank() {//检测银行卡信息
+      var that = this;
+      var params = {
+        user_id: this.userId };
+
+      that.request.getdata('getFindBank', params).then(function (res) {
+        console.log(res, '检测银行卡');
+        if (res.code == 300) {
+          uni.navigateTo({
+            url: '../cardInfo/cardInfo' });
+
+        }
+      });
+    },
+    getUserCash: function getUserCash() {var _this = this; //立即提现
+      this.getFindBank();
+      if (this.money == '') {
+        uni.showToast({
+          title: '请输入提现金额',
+          icon: 'none',
+          duration: 2000 });
+
+        return false;
+      }
+      var that = this;
+      var params = {
+        user_id: this.userId,
+        money: this.money };
+
+      that.request.getdata('getUserCash', params).then(function (res) {
+        console.log(res, '提现');
+        _this.isPop = true;
+      });
+    },
+    Allcash: function Allcash() {//全部提现
+
+    },
+    Close: function Close() {//关闭提现成功弹框
+      this.isPop = false;
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

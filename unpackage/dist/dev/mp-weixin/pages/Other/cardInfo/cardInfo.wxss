@@ -113,6 +113,12 @@ view.data-v-2f0ef9b2, text.data-v-2f0ef9b2 {
   font-weight: 500;
 }
 /*其他*/
+.ml.data-v-2f0ef9b2 {
+  margin-left: 30rpx;
+}
+.mr.data-v-2f0ef9b2 {
+  margin-right: 30rpx;
+}
 .mb30.data-v-2f0ef9b2 {
   margin-bottom: 30rpx;
 }
@@ -198,6 +204,6 @@ view.data-v-2f0ef9b2, text.data-v-2f0ef9b2 {
   box-shadow: 0px 5rpx 20rpx 0px rgba(209, 108, 77, 0.2);
   border-radius: 10rpx;
   line-height: 80rpx;
-  margin: 80rpx 30rpx 0  30rpx;
+  margin: 80rpx 30rpx 0 30rpx;
 }
 

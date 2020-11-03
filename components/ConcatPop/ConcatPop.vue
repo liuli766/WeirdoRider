@@ -12,33 +12,37 @@
 
 <script>
 	import {
-		mapState, 
+		mapState,
 	} from 'vuex';
 	export default {
 		data() {
 			return {
-				
+
 			}
 		},
 		computed: {
-		    ...mapState({
-				isConcatPop:(state) => state.isConcatPop
+			...mapState({
+				isConcatPop: (state) => state.isConcatPop,
+				tel: (state) => state.tel,
 			}),
 		},
 		methods: {
-			Closepop(){
+			Closepop() {
 				this.$store.commit("showConcatPop", false);
 			},
-			handCall(){
-				console.log(1)
+			handCall() {
+				wx.makePhoneCall({
+					phoneNumber: this.tel
+				})
+				this.$store.commit("showConcatPop", false);
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.popbox{
-		background: rgba(0,0,0,.3);
+	.popbox {
+		background: rgba(0, 0, 0, .3);
 		width: 100%;
 		height: 100%;
 		position: fixed;
@@ -47,20 +51,23 @@
 		z-index: 100;
 		overflow: hidden;
 		transition: all .2s;
-		.popup{
+
+		.popup {
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			margin-left:-280upx ;
+			margin-left: -280upx;
 			margin-top: -276.5upx;
 			width: 560upx;
 			height: 316upx;
 			background: #FFFFFF;
 			border-radius: 20upx;
-			.poptitle{
+
+			.poptitle {
 				margin: 60upx 0 38upx 0;
 			}
-			.btn{
+
+			.btn {
 				width: 560upx;
 				height: 80upx;
 				background: linear-gradient(81deg, #6D99F8 0%, #3C66DF 100%);
@@ -70,6 +77,4 @@
 			}
 		}
 	}
-	
-	
 </style>

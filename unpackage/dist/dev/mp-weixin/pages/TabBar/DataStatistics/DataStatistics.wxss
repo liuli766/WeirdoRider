@@ -113,6 +113,12 @@ view.data-v-173aaf57, text.data-v-173aaf57 {
   font-weight: 500;
 }
 /*其他*/
+.ml.data-v-173aaf57 {
+  margin-left: 30rpx;
+}
+.mr.data-v-173aaf57 {
+  margin-right: 30rpx;
+}
 .mb30.data-v-173aaf57 {
   margin-bottom: 30rpx;
 }

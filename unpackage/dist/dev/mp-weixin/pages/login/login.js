@@ -130,53 +130,133 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+
 {
   data: function data() {
-    return {};
+    return {
+      userinfo: {
+        mobile: '',
+        password: '' },
+
+      remberpwd: false //记住密码状态
+    };
+  },
+  computed: _objectSpread({},
+  (0, _vuex.mapState)({
+    userId: function userId(state) {return state.userId;} })),
 
 
+  onLoad: function onLoad() {
+    this.RemberPwd();
   },
   methods: {
-    formSubmit: function formSubmit(e) {
-      console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value));
-      var formdata = e.detail.value;
-      uni.showModal({
-        content: '表单数据内容：' + JSON.stringify(formdata),
-        showCancel: false });
+    formSubmit: function formSubmit(e) {var _this = this; //登录
+      console.log(e);
+      var params = {
+        mobile: this.userinfo.mobile,
+        password: this.userinfo.password };
+
+      if (!this.userinfo.mobile) {
+        uni.showToast({
+          title: '账号不能为空',
+          icon: "none" });
+
+        return false;
+      }
+      if (!this.userinfo.password) {
+        uni.showToast({
+          title: '密码不能为空',
+          icon: "none" });
+
+        return false;
+      }
+      var that = this;
+      that.request.getdata('getLogin', params).then(function (res) {
+        uni.showToast({
+          title: res.msg,
+          icon: 'none',
+          duration: 3000 });
+
+        _this.$store.commit('login', res.user_id);
+        uni.switchTab({
+          url: '../TabBar/Home/Home' });
+
+      });
+    },
+    handRemberPwd: function handRemberPwd() {//记住密码
+      if (!this.userinfo.password) {
+        uni.showToast({
+          title: '请输入密码',
+          icon: "none" });
+
+        this.remberpwd = false;
+      } else {
+        this.remberpwd = !this.remberpwd;
+        if (this.remberpwd) {
+          var data = {
+            password: this.userinfo.password,
+            mobile: this.userinfo.mobile };
+
+          uni.setStorage({
+            key: 'pwd',
+            data: JSON.stringify(data) });
+
+        } else {
+          uni.removeStorage({
+            key: 'pwd' });
+
+        }
+      }
+
+    },
+    RemberPwd: function RemberPwd() {
+      var that = this;
+      uni.getStorage({
+        key: 'pwd',
+        success: function success(res) {
+          if (!that.userinfo.password) {
+            var data = JSON.parse(res.data);
+            that.userinfo.password = data.password;
+            that.userinfo.mobile = data.mobile;
+            that.remberpwd = true;
+          }
+        } });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

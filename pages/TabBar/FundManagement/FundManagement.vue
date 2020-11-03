@@ -5,11 +5,11 @@
 			<view class="commission-box flex flex_al-cen text_cen">
 				<view class="font500 colorfff flex flex-col frist">
 					<text class="commission font28">当前佣金(元)</text>
-					<text class="commission-price">128.50</text>
+					<text class="commission-price">{{user_money}}</text>
 				</view>
 				<view class="font500 colorfff flex flex-col two">
 					<text class="commission font28">历史佣金(元)</text>
-					<text class="commission-price">24,00.00</text>
+					<text class="commission-price">{{user_money}}</text>
 				</view>
 			</view>
 		</view>
@@ -31,11 +31,31 @@
 </template>
 
 <script>
+	import {
+		mapState,
+	} from 'vuex';
 	export default {
 		data() {
 			return {
-
+				user_money:'',//当前佣金
+				history_money:'',//历史佣金
 			}
+		},
+		computed: {
+			...mapState({
+				userId: (state) => state.userId,
+			}),
+		},
+		onLoad() {
+			let that = this
+			let params = {
+				user_id: this.userId,
+			}
+			that.request.getdata('getUserBonusInfo', params).then(res => {
+				this.user_money=res.user_money
+				this.history_money=res.history_money
+				console.log(res, '资金管理')
+			})
 		},
 		methods: {
 			Gocash() {

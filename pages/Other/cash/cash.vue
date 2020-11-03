@@ -4,14 +4,14 @@
 			<view class="font32 color333 bold cash-title">提现金额</view>
 			<view class="flex flex_al-cen yuan">
 				<text class="font500 font28 color333">￥</text>
-				<input type="text" class="font30" />
+				<input type="number" class="font30" v-model="money"/>
 			</view>
 			<view class="flex flex_be all-cash  font24">
-				<text class="color999">当前可提现金额128.5元</text>
-				<text class="all-cash-price">全部提现</text>
+				<text class="color999">当前可提现金额{{}}元</text>
+				<text class="all-cash-price" @tap="Allcash">全部提现</text>
 			</view>
 		</view>
-		<view class="btn font32 font500 colorfff text_cen">立即提现</view>
+		<view class="btn font32 font500 colorfff text_cen" @tap="getUserCash">立即提现</view>
 		<view class="color333 font500 font32 cash-rule">提现规则</view>
 		<view class="popbox" v-if="isPop">
 			<view class="popup text_cen">
@@ -40,14 +40,65 @@
 </template>
 
 <script>
+	import {
+		mapState,
+	} from 'vuex';
 	export default {
 		data() {
 			return {
-				isPop:false
+				isPop:false,//提现成功显示框
+				money:'',//提现金额
 			}
 		},
-		methods: {
+		computed: {
+			...mapState({
+				userId: (state) => state.userId,
+			}),
+		},
+		onLoad() {
 			
+		},
+		methods: {
+			getFindBank(){//检测银行卡信息
+				let that = this
+				let params = {
+					user_id: this.userId,
+				}
+				that.request.getdata('getFindBank', params).then(res => { 
+					console.log(res, '检测银行卡')
+					if(res.code==300){
+						uni.navigateTo({
+							url:'../cardInfo/cardInfo'
+						})
+					}
+				})
+			},
+			getUserCash(){ //立即提现
+				this.getFindBank()
+				if(this.money==''){
+					uni.showToast({
+						title: '请输入提现金额',
+						icon: 'none',
+						duration: 2000
+					});
+					return false;
+				}
+				let that = this
+				let params = {
+					user_id: this.userId,
+					money:this.money
+				}
+				that.request.getdata('getUserCash', params).then(res => { 
+					console.log(res, '提现')
+					this.isPop=true
+				})
+			},
+			Allcash(){ //全部提现
+				
+			},
+			Close(){ //关闭提现成功弹框
+				this.isPop=false
+			}
 		}
 	}
 </script>
