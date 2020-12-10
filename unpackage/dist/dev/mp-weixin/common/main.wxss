@@ -44,4 +44,7 @@
 .icon-dianhua:before {
   content: "\e63d";
 }
+page{
+	background: #F7F9FA;
+}
 

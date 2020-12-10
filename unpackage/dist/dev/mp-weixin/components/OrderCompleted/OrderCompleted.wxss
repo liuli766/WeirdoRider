@@ -128,9 +128,6 @@ view.data-v-494d35a4, text.data-v-494d35a4 {
 .comm.data-v-494d35a4 {
   background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
 }
 /*其他样式*/
 .commbtn.data-v-494d35a4 {

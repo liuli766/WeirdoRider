@@ -4,30 +4,52 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": false
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "wx3c8999d71069086f",
+  "appid": "wx4b6e7648c5e3babf",
   "projectname": "WeirdoRider",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
   "condition": {
-    "plugin": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
       "list": []
     },
     "game": {
       "list": []
     },
-    "gamePlugin": {
-      "list": []
-    },
     "miniprogram": {
-      "list": [
-        {
-          "name": "pages/Other/sjdiji/sjdiji",
-          "pathName": "pages/Other/sjdiji/sjdiji",
-          "scene": null
-        }
-      ]
+      "list": []
     }
   }
 }

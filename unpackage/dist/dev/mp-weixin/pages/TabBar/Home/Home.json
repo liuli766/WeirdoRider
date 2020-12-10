@@ -1,9 +1,11 @@
 {
   "navigationBarTitleText": "首页",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "distribution": "/components/Distribution/Distribution",
     "pop": "/components/PopBox/PopBox",
     "ordercomplted": "/components/OrderCompleted/OrderCompleted",
-    "concatpop": "/components/ConcatPop/ConcatPop"
+    "concatpop": "/components/ConcatPop/ConcatPop",
+    "uni-load-more": "/components/uni-load-more"
   }
 }

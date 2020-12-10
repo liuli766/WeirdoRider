@@ -12,7 +12,7 @@
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
 /******/ 		for(;i < chunkIds.length; i++) {
 /******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 				resolves.push(installedChunks[chunkId][0]);
 /******/ 			}
 /******/ 			installedChunks[chunkId] = 0;
@@ -48,6 +48,7 @@
 /******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
 /******/ 			}
 /******/ 		}
+/******/
 /******/ 		return result;
 /******/ 	}
 /******/
@@ -104,11 +105,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/ConcatPop/ConcatPop":1,"components/Distribution/Distribution":1,"components/OrderCompleted/OrderCompleted":1,"components/PopBox/PopBox":1,"components/personInput":1};
+/******/ 		var cssChunks = {"components/ConcatPop/ConcatPop":1,"components/Distribution/Distribution":1,"components/OrderCompleted/OrderCompleted":1,"components/PopBox/PopBox":1,"components/uni-load-more":1,"components/personInput":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/ConcatPop/ConcatPop":"components/ConcatPop/ConcatPop","components/Distribution/Distribution":"components/Distribution/Distribution","components/OrderCompleted/OrderCompleted":"components/OrderCompleted/OrderCompleted","components/PopBox/PopBox":"components/PopBox/PopBox","components/personInput":"components/personInput"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/ConcatPop/ConcatPop":"components/ConcatPop/ConcatPop","components/Distribution/Distribution":"components/Distribution/Distribution","components/OrderCompleted/OrderCompleted":"components/OrderCompleted/OrderCompleted","components/PopBox/PopBox":"components/PopBox/PopBox","components/uni-load-more":"components/uni-load-more","components/personInput":"components/personInput"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {
@@ -170,6 +171,8 @@
 /******/ 				}
 /******/ 				script.src = jsonpScriptSrc(chunkId);
 /******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
 /******/ 				onScriptComplete = function (event) {
 /******/ 					// avoid mem leaks in IE.
 /******/ 					script.onerror = script.onload = null;
@@ -179,7 +182,8 @@
 /******/ 						if(chunk) {
 /******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
 /******/ 							var realSrc = event && event.target && event.target.src;
-/******/ 							var error = new Error('Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')');
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
 /******/ 							error.type = errorType;
 /******/ 							error.request = realSrc;
 /******/ 							chunk[1](error);

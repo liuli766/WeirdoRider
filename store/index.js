@@ -6,14 +6,14 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		isPop: false, //取货弹框是否显示
-		isConcatPop: false,
+		isConcatPop: false, //一键拨号弹框
 		iscomminput: false,
 		loginStatus: false, //登录状态，
 		userId: '', //用户id
 		tel:'',//一键拨号电话
 		order:{},//抢单
 		userinfo:{},//用户信息
-		userReal:false,//实名认证状态
+		userReal:0,//实名认证状态
 	},
 	getters: {},
 	mutations: {

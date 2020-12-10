@@ -13,7 +13,7 @@
 				<view class="bfff" style="padding:0 30upx;">
 					<view class="login-list flex flex_be">
 						<view class="color3434 font32 font500 login-user">姓名</view>
-						<input type="text" v-model="userinfo.name" name='name' placeholder="你的姓名" placeholder-style='text-align:right' />
+						<input type="text"  name='name' placeholder="你的姓名" placeholder-style='text-align:right' @input="Name" />
 					</view>
 					<view class="login-list flex flex_be meun-name" @tap="handDownmeun">
 						<view class="color3434 font32 font500 login-user">性别</view>
@@ -24,23 +24,30 @@
 					</view>
 					<view class="login-list flex flex_be">
 						<view class="color3434 font32 font500 login-user">所在专业</view>
-						<input type="text" v-model="userinfo.major" name="major" placeholder="填写所在专业" placeholder-style='text-align:right' />
+						<input type="text"  name="major" placeholder="填写所在专业" placeholder-style='text-align:right' @input="major" />
 					</view>
 					<view class="login-list flex flex_be">
 						<view class="color3434 font32 font500 login-user">学号</view>
-						<input type="text" v-model="userinfo.study_num" name="study_num" placeholder="填写学生证号" placeholder-style='text-align:right' />
+						<input type="number"  name="study_num" placeholder="填写学生证号" placeholder-style='text-align:right' @input="studyNum" />
 					</view>
 					<view class="login-list flex flex_be">
 						<view class="color3434 font32 font500 login-user">手机号码</view>
-						<input type="text" v-model="userinfo.mobile" name="mobile" placeholder="填写登录手机号" placeholder-style='text-align:right' />
+						<input type="number"  name="mobile" placeholder="填写登录手机号" placeholder-style='text-align:right' @input="mobile" />
 					</view>
 					<view class="login-list flex flex_be">
 						<view class="color3434 font32 font500 login-user">登录密码</view>
-						<input type="password" v-model="userinfo.password" name="password" placeholder="输入商家登录密码" placeholder-style='text-align:right' />
+						<input type="password"  name="password" placeholder="输入商家登录密码" placeholder-style='text-align:right' @input="password" />
 					</view>
 					<view class="flex login-list flex_be" style="border: none;">
 						<view class="color3434 font32 font500 login-user">确认密码</view>
-						<input type="password" v-model="userinfo.surepwd" name="surepwd" placeholder="确认商家登录密码" placeholder-style='text-align:right' />
+						<input type="password"  name="surepwd" placeholder="确认商家登录密码" placeholder-style='text-align:right' @input="surepwd" />
+					</view>
+					<view class="login-list flex flex_be meun-name" @tap="handleSchool">
+						<view class="color3434 font32 font500 login-user">所在学校</view>
+						<input type="text" v-model="school" placeholder="选择学校" name="cat_id" disabled placeholder-style='text-align:right' />
+						<view class="meun flex flex-col text_cen font32" v-if="isschool" style="width: 400upx;height: 400upx;" >
+							<text v-for="(item,k) in schoolList" :key='k' @tap.stop="handslectschool(item)">{{item.name}}</text>
+						</view>
 					</view>
 				</view>
 				<view class="font24 font500 color999 register-xy">
@@ -54,6 +61,9 @@
 </template>
 
 <script>
+	import {
+		mapState,
+	} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -68,10 +78,61 @@
 					mobile: '',
 					password: '',
 					surepwd: '',
-				}
+				},
+				school:'',
+				isschool:false,
+				schoolList:[],
+				isschoolid:"",
 			}
 		},
+		computed: {
+			...mapState({
+				userId: (state) => state.userId,
+			}),
+		},
+		onLoad() {
+			if(this.userId!==''){
+				uni.switchTab({
+					url: '../TabBar/Home/Home',
+				})
+			}
+			let that = this;
+			let params = {
+				supplier_id: this.supplier_id,
+			}
+			that.request.getdata('getarrSchool', params).then(res => {
+				console.log(res, '学校')
+				that.schoolList=res.data
+			})
+		},
 		methods: {
+			/*
+			***解决uniapp input框输入文字乱跳
+			*/
+			mobile(e){ 
+				let val=e.detail.value
+				this.userinfo.mobile=val
+			},
+			Name(e){
+				let val=e.detail.value
+				this.userinfo.name=val
+			},
+			studyNum(e){
+				let val=e.detail.value
+				this.userinfo.study_num=val
+			},
+			major(e){
+				let val=e.detail.value
+				this.userinfo.major=val
+			},
+			password(e){
+				let val=e.detail.value
+				this.userinfo.password=val
+			},
+			surepwd(e){
+				let val=e.detail.value
+				this.userinfo.surepwd=val
+			},
 			formSubmit: function(e) { //注册
 				let sex = ''
 				this.userinfo.sex == '男' && (sex = 1)
@@ -121,7 +182,7 @@
 					});
 					return false;
 				}
-				if (!/^[0-9][1-9]{10}$/.test(this.userinfo.mobile)) {
+				if (!/^(13[0-9]|14[01456879]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[0-3,5-9])\d{8}$/.test(this.userinfo.mobile)) {
 					uni.showToast({
 						title: '手机号码格式不正确',
 						icon: "none"
@@ -169,8 +230,16 @@
 				this.isDownmeun = false
 			},
 			handDownmeun() { //显示性别下拉框
-				this.isDownmeun = true
+				this.isDownmeun = !this.isDownmeun
 			},
+			handleSchool(){
+				this.isschool = !this.isschool
+			},
+			handslectschool(item){
+				this.school = item.name
+				this.isschool= false
+				this.isschoolid= item.id
+			}
 		}
 	}
 </script>
@@ -212,6 +281,7 @@
 
 			input {
 				text-align: right;
+				padding-right: 20upx;
 			}
 
 			.login-btn {
@@ -239,7 +309,7 @@
 					border-radius: 10upx;
 					z-index: 9;
 					transition: all .2s;
-
+					overflow: auto;
 					text:hover {
 						background: #F7F9FA;
 					}

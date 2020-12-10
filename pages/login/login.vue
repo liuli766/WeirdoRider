@@ -14,11 +14,13 @@
 			<form @submit="formSubmit">
 				<view class="login-list">
 					<view class="color3434 font32 font500 login-user">账号</view>
-					<input type="text" placeholder="请输入你的账号" v-model="userinfo.mobile" value="userinfo.mobile" />
+					<input type="text" placeholder="请输入你的账号" v-if="remberpwd" :value="userinfo.mobile"  @input="mobile"/>
+					<input type="text" placeholder="请输入你的账号" v-else   @input="mobile"/>
 				</view>
 				<view class="login-list mb">
 					<view class="color3434 font32 font500 login-user">密码</view>
-					<input type="password" placeholder="请输入你的密码" v-model="userinfo.password" />
+					<input type="password" placeholder="请输入你的密码" v-if="remberpwd" :value="userinfo.password"   @input="password" />
+					<input type="password" placeholder="请输入你的密码" v-else   @input="password" />
 				</view>
 				<view class="flex flex_al-cen pad" @tap="handRemberPwd">
 					<text class="cicle" :class="{'cicle-active':remberpwd}"></text>
@@ -54,6 +56,14 @@
 			this.RemberPwd()
 		},
 		methods: {
+			mobile(e){
+				let val=e.detail.value
+				this.userinfo.mobile=val
+			},
+			password(e){
+				let val=e.detail.value
+				this.userinfo.password=val
+			},
 			formSubmit: function(e) { //登录
 				console.log(e)
 				let params = {
@@ -76,15 +86,21 @@
 				}
 				let that = this
 				that.request.getdata('getLogin', params).then(res => {
-					uni.showToast({
-						title: res.msg,
-						icon: 'none',
-						duration: 3000
-					});
-					this.$store.commit('login',res.user_id)
-					uni.switchTab({
-						url: '../TabBar/Home/Home',
-					})
+					if(res.code==200){
+						uni.setStorageSync('pawd', this.userinfo.password);
+						uni.showToast({
+							title: res.msg,
+							icon: 'none',
+							duration: 3000
+						});
+						this.$store.commit('login',res.user_id)
+						uni.switchTab({
+							url: '../TabBar/Home/Home',
+						})
+					}else{
+						return;
+					}
+					
 				})
 			},
 			handRemberPwd() { //记住密码
@@ -105,9 +121,17 @@
 							key: 'pwd',
 							data: JSON.stringify(data)
 						})
+						uni.showToast({
+							title: '记住密码成功',
+							icon: "none"
+						});
 					} else {
 						uni.removeStorage({
 							key: 'pwd',
+						});
+						uni.showToast({
+							title: '取消记住密码成功',
+							icon: "none"
 						});
 					}
 				}
@@ -118,12 +142,10 @@
 				uni.getStorage({
 					key: 'pwd',
 					success: function(res) {
-						if (!that.userinfo.password) {
-							let data = JSON.parse(res.data)
-							that.userinfo.password = data.password
-							that.userinfo.mobile = data.mobile
-							that.remberpwd = true
-						}
+						let data = JSON.parse(res.data)
+						that.userinfo.password = data.password
+						that.userinfo.mobile = data.mobile
+						that.remberpwd = true
 					}
 				});
 			}
@@ -163,7 +185,7 @@
 			width: 200upx;
 			height: 200upx;
 			background: #FFFFFF;
-			box-shadow: 1upx 4upx 20upx 0px rgba(0, 0, 0, 0.06);
+			box-shadow: 1px 4upx 20upx 0px rgba(0, 0, 0, 0.06);
 			border-radius: 10upx;
 			position: absolute;
 			top: 265upx;
@@ -181,7 +203,7 @@
 		}
 
 		.login-list {
-			border-bottom: 1upx solid #DEDEDE;
+			border-bottom: 1px solid #DEDEDE;
 			margin-bottom: 60upx;
 		}
 
@@ -201,7 +223,7 @@
 			display: inline-block;
 			width: 32upx;
 			height: 32upx;
-			border: 1upx solid #666666;
+			border: 1px solid #666666;
 			border-radius: 50%;
 			margin-right: 10upx;
 			position: relative;

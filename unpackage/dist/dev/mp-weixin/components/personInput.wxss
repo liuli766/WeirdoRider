@@ -128,9 +128,6 @@ view.data-v-6df0c10a, text.data-v-6df0c10a {
 .comm.data-v-6df0c10a {
   background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
 }
 /*其他样式*/
 .commbtn.data-v-6df0c10a {

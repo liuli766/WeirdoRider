@@ -128,9 +128,6 @@ view.data-v-891c2434, text.data-v-891c2434 {
 .comm.data-v-891c2434 {
   background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
 }
 /*其他样式*/
 .commbtn.data-v-891c2434 {
@@ -187,6 +184,7 @@ view.data-v-891c2434, text.data-v-891c2434 {
 }
 .login-box .form input.data-v-891c2434 {
   text-align: right;
+  padding-right: 20rpx;
 }
 .login-box .form .login-btn.data-v-891c2434 {
   width: 690rpx;
@@ -212,6 +210,7 @@ view.data-v-891c2434, text.data-v-891c2434 {
   z-index: 9;
   -webkit-transition: all .2s;
   transition: all .2s;
+  overflow: auto;
 }
 .login-box .form .meun-name .meun text.data-v-891c2434:hover {
   background: #F7F9FA;

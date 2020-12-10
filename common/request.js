@@ -1,5 +1,5 @@
 export default {
-	base: 'http://192.168.1.6/index.php/api',
+	base: 'http://freak.jisapp.cn/index.php/api',
 	interface: {
 		getRegister: '/Rider/register', //骑手注册
 		getLogin: '/Rider/login', //骑手登录
@@ -21,6 +21,10 @@ export default {
 		getUserBonus:'/Rider/userBonus',//资金收入/提现记录
 		getFindBank:'/Rider/findBank',//打开提现检测（银行卡）
 		getUserInfo:'/Rider/userInfo',//骑手中心
+		getorderPickup:'/Rider/orderPickup',//骑手确认取货
+		getorderOk:'/Rider/orderOk',//骑手确认送达
+		getarrSchool:'/Index/arrSchool',//获取学校列表
+		getxieyi:"/Users/xieyi",//用户协议
 	},
 	getdata: function(url, data, method) {
 		let vm = this;
@@ -40,14 +44,17 @@ export default {
 					method: method ? method : 'POST',
 					success: (res) => {
 						if (res.data.code == 200) {
+							console.log(res.data.code)
 							resolve(res.data);
 						}
 						if (res.data.code == 300) {
+							console.log(res.data.code)
 							uni.showToast({
 								title: res.data.msg,
 								icon: 'none',
 								duration: 3000
 							});
+							resolve(res.data);
 						}
 						if (res.data.code == 401) {
 							uni.showToast({

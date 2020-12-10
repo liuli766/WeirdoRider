@@ -128,9 +128,6 @@ view.data-v-591bea87, text.data-v-591bea87 {
 .comm.data-v-591bea87 {
   background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
 }
 /*其他样式*/
 .commbtn.data-v-591bea87 {
@@ -203,7 +200,7 @@ view.data-v-591bea87, text.data-v-591bea87 {
   height: 80rpx;
   background: -webkit-linear-gradient(9deg, #6E9AF8 0%, #3C66DF 100%);
   background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
-  box-shadow: 1rpx 5rpx 20rpx 0px rgba(209, 109, 78, 0.2);
+  box-shadow: 1px 5rpx 20rpx 0px rgba(209, 109, 78, 0.2);
   border-radius: 10rpx;
   line-height: 80rpx;
   margin: 0 auto;

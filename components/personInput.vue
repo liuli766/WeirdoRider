@@ -8,7 +8,10 @@
 			<view class="nickname">{{userinfoList.name}}</view>
 		</view>
 		<view class="person-input mt30 flex flex_al-cen font500 font30 color666">
-			<input type="text"   v-model="userinfoList.placeholder"/>
+			<input type="text" v-if="idNum!==2 && (idNum!==4) && (IdCard!==20)"  @input="GetVal" :value="userinfoList.placeholder" />
+			<input type="number" v-if="idNum==2 && (IdCard!==20)" @input="GetVal"  :value="userinfoList.placeholder"/>
+			<input type="number" v-if="idNum==4 " @input="GetVal" :value="userinfoList.placeholder" />
+			<input type="number" v-if="IdCard==20 &&  (idNum!==4)" @input="GetVal"  :value="userinfoList.placeholder" />
 			<text class="keep" @tap="handKeep(userinfoList)">保存</text>
 		</view>
 
@@ -21,26 +24,29 @@
 		mapState,
 	} from 'vuex';
 	export default {
-		props:{
-			userinfoList:{
-				type:Object,
+		props: {
+			userinfoList: {
+				type: Object,
 				default: function() {
 					return {}
 				}
 			},
-			idNum:{
-				type:Number,
-				default:0
+			idNum: {
+				type: Number,
+				default: 0
+			},
+			IdCard: {
+				type: Number,
+				default: 20
 			}
 		},
 		data() {
 			return {
 				show: false,
-				
 			}
 		},
-		onLoad() {
-			console.log(this.userinfoList)
+		created() {
+
 		},
 		computed: {
 			...mapState({
@@ -48,11 +54,40 @@
 			}),
 		},
 		methods: {
+			GetVal(e){
+				let val=e.detail.value
+				this.userinfoList.placeholder=val
+			},
 			handback() {
 				this.$store.commit("Showcomminput", false);
 			},
-			handKeep(item){
-				this.$emit('handKeep',item.placeholder);
+			handKeep(item) {
+				if (item.placeholder == '') {
+					uni.showToast({
+						title: '不能为空',
+						icon: 'none',
+						duration: 2000
+					});
+					return false;
+				}
+				if (this.idNum == 2 && (!/^1[34578]\d{9}$/.test(item.placeholder))) {
+					uni.showToast({
+						title: '手机格式不正确',
+						icon: 'none',
+						duration: 2000
+					});
+					return false;
+				}
+				if ((this.IdCard == 20)&&(this.idNum==1) && (!
+						/^[1-8][1-7]\d{4}(?:19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])\d{3}[\dX]$/.test(item.placeholder))) {
+					uni.showToast({
+						title: '身份证格式不正确',
+						icon: 'none',
+						duration: 2000
+					});
+					return false;
+				}
+				this.$emit('handKeep', item.placeholder);
 				console.log(item.placeholder)
 				this.$store.commit("Showcomminput", false);
 			}
@@ -61,7 +96,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.comm{
+	.comm {
 		background-color: #F7F9FA;
 		height: 100%;
 		position: absolute;
@@ -71,6 +106,7 @@
 		top: 0;
 		transition: all .2s;
 	}
+
 	.status_bar {
 		height: var(--status-bar-height);
 		width: 100%;
@@ -81,9 +117,11 @@
 	.nickname {
 		margin-left: 240upx;
 	}
-	input{
+
+	input {
 		flex: 1;
 	}
+
 	.person-nav {
 		padding-left: 10upx;
 		background: #fff;
@@ -92,12 +130,14 @@
 		height: 100rpx;
 		padding-top: 30rpx;
 	}
-	.person-input{
+
+	.person-input {
 		height: 88upx;
 		padding: 30upx 32upx;
 		background: #fff;
 		box-sizing: border-box;
-		.keep{
+
+		.keep {
 			padding-left: 21upx;
 			border-left: 1px solid #EEEEEE;
 		}

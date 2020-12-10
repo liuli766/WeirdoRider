@@ -2,7 +2,7 @@
 	<view class="pickupdetail comm">
 		<view class="page-item">
 			<ordercomplted class="page-item" :orderList='detail'>
-				<text class="color3434 bold font32" slot='tit'>顾客已等待3分钟</text>
+				<text class="color3434 bold font32" slot='tit'>订单配送中</text>
 				<view class="evaluate font500 font24 text_cen" slot='stay'>配送中</view>
 				<text class="color333 font26 font500" slot='concat' @tap.stop='Concat(detail.supplier_mobile)'>联系商家</text>
 			</ordercomplted>
@@ -22,8 +22,8 @@
 			订单配送遇到问题，未能按时到达，
 			<text style="color: #5D82FF;">提起申诉</text>
 		</view>
-		<view class="flex text_cen">
-			<view class="sjbtn font500" @tap="getCancel">取消订单</view>
+		<view class="flex text_cen flex_jus-cen">
+			<!-- <view class="sjbtn font500" @tap="getCancel">取消订单</view> -->
 			<view class="gkbtn colorfff font500" @tap="Goods">确认送达</view>
 		</view>
 		<concatpop v-if="isConcatPop" />
@@ -80,7 +80,8 @@
 				isShowList:false,// 是否显示列表框
 				selectText:'',// 已经选择的内容
 				isShowPop:false,//取消订单弹框
-				NoteText:''
+				NoteText:'',
+				orderid:''
 			}
 		},
 		computed: {
@@ -93,6 +94,7 @@
 		},
 		onLoad(option) {
 			console.log(option)
+			this.orderid=option.id
 			let that = this
 			let params = {
 				order_id: option.id
@@ -111,8 +113,17 @@
 				this.$store.commit("showConcatPop", true);
 				this.$store.commit('Call',phone)
 			},
-			Goods(){
-				this.$store.commit("showPop", true);
+			Goods(){//确认送达
+				let that = this
+				let params = {
+					order_id: that.orderid,
+					rider_id: that.userId
+				}
+				that.request.getdata('getorderOk', params).then(res => {
+					console.log(res, '确认送达')
+					this.$store.commit("showPop", true);
+				})
+				
 			},
 			getCancel() { //取消订单按钮
 				this.isShowPop=true
@@ -218,7 +229,7 @@
 		width: 500upx;
 		height: 80upx;
 		background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
-		box-shadow: 1upx 5upx 20upx 0px rgba(209, 109, 78, 0.2);
+		box-shadow: 1px 5upx 20upx 0px rgba(209, 109, 78, 0.2);
 		border-radius: 10upx;
 		line-height: 80upx;
 		margin: 0 auto;
@@ -254,7 +265,7 @@
 			.confirm {
 				width: 200upx;
 				line-height: 80upx;
-				border: 1upx solid #EEEEEE;
+				border: 1px solid #EEEEEE;
 				border-radius: 10upx;
 	
 			}
@@ -270,7 +281,7 @@
 			.input {
 				width: 500upx;
 				height: 80upx;
-				border: 1upx solid #EDEDED;
+				border: 1px solid #EDEDED;
 				border-radius: 10upx;
 				padding: 0 30upx;
 				box-sizing: border-box;
@@ -333,7 +344,7 @@
 			textarea{
 				width: 500upx;
 				height: 280upx;
-				border: 1upx solid #DEDEDE;
+				border: 1px solid #DEDEDE;
 				border-radius: 10upx;
 				padding: 28upx 30upx;
 				box-sizing: border-box;

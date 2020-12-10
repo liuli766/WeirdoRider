@@ -128,9 +128,6 @@ view.data-v-b237504c, text.data-v-b237504c {
 .comm.data-v-b237504c {
   background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
 }
 /*其他样式*/
 .commbtn.data-v-b237504c {
@@ -181,7 +178,7 @@ view.data-v-b237504c, text.data-v-b237504c {
   width: 200rpx;
   height: 200rpx;
   background: #FFFFFF;
-  box-shadow: 1rpx 4rpx 20rpx 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 1px 4rpx 20rpx 0px rgba(0, 0, 0, 0.06);
   border-radius: 10rpx;
   position: absolute;
   top: 265rpx;
@@ -196,7 +193,7 @@ view.data-v-b237504c, text.data-v-b237504c {
   padding: 0 60rpx;
 }
 .login-box .login-list.data-v-b237504c {
-  border-bottom: 1rpx solid #DEDEDE;
+  border-bottom: 1px solid #DEDEDE;
   margin-bottom: 60rpx;
 }
 .login-box .mb.data-v-b237504c {
@@ -212,7 +209,7 @@ view.data-v-b237504c, text.data-v-b237504c {
   display: inline-block;
   width: 32rpx;
   height: 32rpx;
-  border: 1rpx solid #666666;
+  border: 1px solid #666666;
   border-radius: 50%;
   margin-right: 10rpx;
   position: relative;

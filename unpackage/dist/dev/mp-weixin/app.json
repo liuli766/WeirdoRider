@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/register/register",
     "pages/TabBar/Home/Home",
     "pages/TabBar/FundManagement/FundManagement",
     "pages/TabBar/DataStatistics/DataStatistics",
     "pages/TabBar/Mine/Mine",
-    "pages/login/login",
-    "pages/register/register"
+    "pages/login/login"
   ],
   "subPackages": [
     {
@@ -68,5 +68,11 @@
       }
     ]
   },
-  "usingComponents": {}
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取位置"
+    }
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap74.json"
 }

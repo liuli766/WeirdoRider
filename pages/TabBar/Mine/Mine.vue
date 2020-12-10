@@ -13,12 +13,15 @@
 					<view class="font500 font24 authorized text_cen unauthorized" v-if="userReal==1" style="color: #fff;">已实名</view>
 					<view class="font500 font24 authorized text_cen unauthorized" v-if="userReal==2" style="color: #fff;">审核中</view>
 				</view>
-				<view class="iconfont icon-you"></view>
+				<!-- <view class="iconfont icon-you"></view> -->
 			</view>
 			<view class="mb30 mt30">
 				<view class="flex flex_be list-item line" @tap="GoAccountSet">
 					<text class="color3434 font500 font30">账户设置</text>
-					<text class="iconfont icon-you"></text>
+					<view>
+						<text class="colorffa font26" v-if="userReal==1">已实名</text>
+						<text class="iconfont icon-you"></text>
+					</view>
 				</view>
 				<view class="flex flex_be list-item line" @tap="GorealName">
 					<text class="color3434 font500 font30">实名认证</text>
@@ -112,10 +115,10 @@
 			const hour = date.getHours();
 			const minus = []
 			const minu = date.getMinutes();
-			for (let i = 0; i < date.getHours(); i++) {
+			for (let i = 0; i < 24; i++) {
 				hours.push(i)
 			}
-			for (let i = 0; i < date.getMinutes(); i++) {
+			for (let i = 0; i < 60; i++) {
 				minus.push(i)
 			}
 			return {
@@ -123,6 +126,7 @@
 				CancelList: [], //区域列表
 				isShowList: false, // 是否显示列表框
 				selectText: [], //选中的文字
+				slectedid:[],
 				isshowtime: false, //时间弹框
 				title: 'picker-view',
 				hours,
@@ -131,9 +135,10 @@
 				minu,
 				newbefortime: '', //开始时间
 				newaftertime: '', //结束时间
-				suretime: '', //input确定时间
-				value: [60, hour - 1, minu - 1],
+				// suretime: '', //input确定时间
+				value: [60, 23, 8],
 				personInfo:{},//个人信息
+				
 			}
 		},
 		computed: {
@@ -141,8 +146,14 @@
 				userId: (state) => state.userId,
 				userReal: (state) => state.userReal,
 			}),
+			suretime() {
+				if (this.newbefortime !== "" || this.newaftertime !== "") {
+					return this.newbefortime + '-' + this.newaftertime
+				}
+			
+			}
 		},
-		onLoad() {
+		created() {
 			let that = this
 			let params = {
 				user_id: this.userId,
@@ -154,10 +165,10 @@
 				this.CancelList = res.data
 				console.log(this.CancelList, '区域列表')
 			})
-			that.request.getdata('getUserInfo',params).then(res => {
-				console.log(res, '骑手中心')
-				this.personInfo=res.data
-			})
+		},
+		onShow() {
+			this.personInfo={}
+			this.Riderperson()
 		},
 		methods: {
 			listBoxHeight() { // 列表框的总高度
@@ -168,8 +179,10 @@
 				item.isCheck = !item.isCheck
 				if (item.isCheck) {
 					this.selectText.push(item.name)
+					this.slectedid.push(item.id)
 				} else {
 					this.selectText.pop(item.name)
+					this.slectedid.pop(item.id)
 				}
 				console.log(this.selectText)
 			},
@@ -212,23 +225,25 @@
 				this.isshowtime = false
 			},
 			Confirmtimepop() { //确定时间弹窗
-			console.log(this.newaftertime=='','dsasds')
 			if(this.newaftertime==''||this.newbefortime==''){
-				uni.showToast({
-					title: '请选择时间',
-					icon: 'none',
-					duration:2000
-				});
+				// uni.showToast({
+				// 	title: '请选择时间',
+				// 	icon: 'none',
+				// 	duration:2000
+				// });
+				this.newbefortime='23:23'
+				this.newaftertime='23:23'
 				return false;
 			}else{
-				this.suretime = this.newbefortime + '-' + this.newaftertime
+				// this.suretime = this.newbefortime + '-' + this.newaftertime
+				let time = this.newbefortime + '-' + this.newaftertime
 				this.isshowtime = false
 			}
 				console.log(this.suretime)
 			},
 			handCommConfirm(){ //工作设置
 				let that = this
-				let region=this.selectText.toString()
+				let region=this.slectedid.toString()
 				let params = {
 					user_id:this.userId,
 					region,
@@ -264,6 +279,16 @@
 			handcancelPop(){ //关闭整个弹窗
 				this.isShowPop=false
 			},
+			Riderperson(){
+				let that = this
+				let params = {
+					user_id: this.userId,
+				}
+				that.request.getdata('getUserInfo',params).then(res => {
+					console.log(res, '骑手中心')
+					this.personInfo=res.data
+				})
+			},
 			GoAccountSet() {
 				uni.navigateTo({
 					url: '../../Other/AccountSet/AccountSet'
@@ -275,9 +300,11 @@
 				})
 			},
 			GorealName() {
-				uni.navigateTo({
-					url: '../../Other/realName/realName'
-				})
+				if(this.userReal!=1){
+					uni.navigateTo({
+						url: '../../Other/realName/realName'
+					})
+				}
 			}
 		}
 	}
@@ -312,11 +339,11 @@
 				color: #FFAC68;
 				width: 100upx;
 				height: 34upx;
-				border: 1upx solid #FFAC68;
+				border: 1px solid #FFAC68;
 				border-radius: 4upx;
 				line-height: 34upx;
 				margin-left: 20upx;
-				margin-right: 160upx;
+				// margin-right: 160upx;
 				align-self: flex-start;
 				margin-top: 10rpx;
 			}
@@ -367,7 +394,7 @@
 			.confirm {
 				width: 200upx;
 				line-height: 80upx;
-				border: 1upx solid #EEEEEE;
+				border: 1px solid #EEEEEE;
 				border-radius: 10upx;
 
 			}
@@ -383,7 +410,7 @@
 			.input {
 				width: 500upx;
 				height: 80upx;
-				border: 1upx solid #EDEDED;
+				border: 1px solid #EDEDED;
 				border-radius: 10upx;
 				padding: 0 30upx;
 				box-sizing: border-box;
@@ -442,7 +469,7 @@
 				display: inline-block;
 				width: 32upx;
 				height: 32upx;
-				border: 1upx solid #666666;
+				border: 1px solid #666666;
 				border-radius: 50%;
 				margin-right: 10upx;
 				position: relative;
@@ -465,7 +492,7 @@
 			textarea {
 				width: 500upx;
 				height: 280upx;
-				border: 1upx solid #DEDEDE;
+				border: 1px solid #DEDEDE;
 				border-radius: 10upx;
 				padding: 28upx 30upx;
 				box-sizing: border-box;

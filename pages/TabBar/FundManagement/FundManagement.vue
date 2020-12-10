@@ -5,11 +5,11 @@
 			<view class="commission-box flex flex_al-cen text_cen">
 				<view class="font500 colorfff flex flex-col frist">
 					<text class="commission font28">当前佣金(元)</text>
-					<text class="commission-price">{{user_money}}</text>
+					<text class="commission-price">{{user_money==null?0.00:user_money}}</text>
 				</view>
 				<view class="font500 colorfff flex flex-col two">
 					<text class="commission font28">历史佣金(元)</text>
-					<text class="commission-price">{{user_money}}</text>
+					<text class="commission-price">{{history_money==0?0.00:history_money}}</text>
 				</view>
 			</view>
 		</view>
@@ -49,18 +49,18 @@
 		onLoad() {
 			let that = this
 			let params = {
-				user_id: this.userId,
+				user_id: that.userId,
 			}
 			that.request.getdata('getUserBonusInfo', params).then(res => {
-				this.user_money=res.user_money
-				this.history_money=res.history_money
-				console.log(res, '资金管理')
+				that.user_money=res.user_money
+				that.history_money=res.history_money
+				console.log(that.history_money, '资金管理')
 			})
 		},
 		methods: {
 			Gocash() {
 				uni.navigateTo({
-					url: '../../Other/cash/cash'
+					url: `../../Other/cash/cash?user_money=${this.user_money}`
 				})
 			},
 			Gocardinfo() {

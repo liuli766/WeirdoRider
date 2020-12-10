@@ -1,5 +1,5 @@
 <template>
-	<view class="home comm">
+	<view class="home comm1">
 		<scroll-view id="tab-bar" class="tab-bar" :scroll="false" :scroll-x="true" :show-scrollbar="false" :scroll-into-view="scrollInto">
 			<view class="flex flex_al-cen flex_ar" style="padding-top: 30upx;padding-bottom: 22upx;">
 				<view class="uni-tab-item" v-for="(tab,index) in homenavList" :key="tab.id" :id="tab.id" :ref="'tabitem'+index"
@@ -8,78 +8,70 @@
 				</view>
 			</view>
 		</scroll-view>
-		<swiper class="tab-box" ref="swiper1" :current="tabIndex" :duration="300" @change="onswiperchange" style="margin-top: 88rpx;"
-		 @animationfinish="animationfinish">
-			<swiper-item class="swiper-item" v-for="(page, index) in homenavList" :key="index">
-				<scroll-view scroll-y>
-					<block>
-						<view class="component">
-							<!-- 待抢单 -->
-							<view class="page-item" v-if='tabIndex===0'>
-								<view v-if="orderList.length!==0">
-									<distribution class="pageitem" v-for="(item,v) in orderList" :key='v' :orderList='item' @tap="GodistribuDetail(item)">
-										<view class="btn1 colorfff font500 font32 text_cen" @tap.stop="GunList(item.supplier_lat,item.supplier_lon,item.supplier_address)" slot='qiangdan'>抢单</view>
-									</distribution>
-								</view>
-								<view v-else class="flex flex_jus-cen flex_al-cen font26 color666">-没有更多数据拉(*^_^*)-</view>
-							</view>
-							<!-- 已完成 -->
-							<view class="page-item" v-if='tabIndex===3'>
-								<view v-if="orderList.length!==0">
-									<ordercomplted class="pageitem" @tap="GoOrderComDetail(item)" v-for="(item,v) in orderList" :key='v' :orderList='item'>
-										<text class="color3434 bold font32" slot='tit'>订单已完成</text>
-										<text class="color333 font26 font500" slot='concat' @tap.stop="Concat">联系商家</text>
-										<view class="color999 font500 font24 text_cen">距离：{{item.distance}}km</view>
-										<view class="flex text_cen" slot='btn'>
-											<view class="sjbtn font500"  @tap.stop="Concat(item.supplier_mobile)">联系商家</view>
-											<view class="gkbtn colorfff font500" @tap.stop="Concat(item.user_mobile)">联系顾客</view>
-										</view>
-									</ordercomplted>
-								</view>
-								<view v-else class="flex flex_jus-cen flex_al-cen font26 color666">-没有更多数据拉(*^_^*)-</view>
-							</view>
-							<!-- 待取货 -->
-							<view class="page-item" v-if='tabIndex===1'>
-								<view v-if="orderList.length!==0">
-									<ordercomplted class="pageitem" @tap="GoPickupDetail(item)" v-for="(item,v) in orderList" :key='v' :orderList='item'>
-										<text class="color3434 bold font32" slot='tit'>顾客已等待3分钟</text>
-										<text class="color333 font26 font500" slot='concat'>距离：{{item.distance}}km</text>
-										<view class="flex text_cen" slot='btn'>
-											<view class="sjbtn font500" @tap.stop="Concat(item.supplier_mobile)">联系商家</view>
-											<view class="gkbtn colorfff font500" @tap.stop="Concat(item.user_mobile)">联系顾客</view>
-										</view>
-									</ordercomplted>
-								</view>
-								<view v-else class="flex flex_jus-cen flex_al-cen font26 color666">-没有更多数据拉(*^_^*)-</view>
-							</view>
-							<!-- 配送中 -->
-							<view class="page-item" v-if='tabIndex===2'>
-								<view v-if="orderList.length!==0">
-									<ordercomplted class="pageitem" v-if='tabIndex===2' @tap="GogiveDetail(item)" v-for="(item,v) in orderList" :key='v'
-									 :orderList='item'>
-										<text class="color3434 bold font32" slot='tit'>顾客已等待3分钟</text>
-										<text class="color333 font26 font500" slot='concat'>距离：{{item.distance}}km</text>
-										<view class="flex text_cen" slot='btn'>
-											<view class="sjbtn font500" @tap.stop="Concat(item.supplier_mobile)">联系商家</view>
-											<view class="gkbtn colorfff font500" @tap.stop="Concat(item.user_mobile)">联系顾客</view>
-										</view>
-									</ordercomplted>
-								</view>
-								<view v-else class="flex flex_jus-cen flex_al-cen font26 color666">-没有更多数据拉(*^_^*)-</view>
-							</view>
+		<view class="component" style="padding-top: 80rpx;">
+			<!-- 待抢单 -->
+			<view class="page-item" v-if='tabIndex===0'>
+				<view v-if="orderList.length!==0">
+					<distribution class="pageitem" v-for="(item,v) in orderList" :key='v' :orderList='item' @tap="GodistribuDetail(item)">
+						<view class="btn1 colorfff font500 font32 text_cen" @tap.stop="GunList(item.supplier_lat,item.supplier_lon,item.supplier_address,item)"
+						 slot='qiangdan'>抢单</view>
+					</distribution>
+				</view>
+				<!-- <view v-else class="flex flex_jus-cen flex_al-cen font26 color666">-没有更多数据拉(*^_^*)-</view> -->
+			</view>
+			<!-- 已完成 -->
+			<view class="page-item" v-if='tabIndex===3'>
+				<view v-if="orderList.length!==0">
+					<ordercomplted class="pageitem" @tap="GoOrderComDetail(item)" v-for="(item,v) in orderList" :key='v' :orderList='item'>
+						<text class="color3434 bold font32" slot='tit'>订单已完成</text>
+						<text class="color333 font26 font500" slot='concat' @tap.stop="Concat">联系商家</text>
+						<view class="color999 font500 font24 text_cen">距离：{{item.distance}}km</view>
+						<view class="flex text_cen" slot='btn'>
+							<view class="sjbtn font500" @tap.stop="Concat(item.supplier_mobile)">联系商家</view>
+							<view class="gkbtn colorfff font500" @tap.stop="Concat(item.user_mobile)">联系顾客</view>
 						</view>
-
-					</block>
-				</scroll-view>
-			</swiper-item>
-		</swiper>
+					</ordercomplted>
+				</view>
+				<!-- <view v-else class="flex flex_jus-cen flex_al-cen font26 color666">-没有更多数据拉(*^_^*)-</view> -->
+			</view>
+			<!-- 待取货 -->
+			<view class="page-item" v-if='tabIndex===1'>
+				<view v-if="orderList.length!==0">
+					<ordercomplted class="pageitem" @tap="GoPickupDetail(item)" v-for="(item,v) in orderList" :key='v' :orderList='item'>
+						<text class="color3434 bold font26" slot='tit'>订单号：{{item.order_sn}}</text>
+						<text class="color333 font26 font500" slot='concat'>距离：{{item.distance}}km</text>
+						<view class="flex text_cen" slot='btn'>
+							<view class="sjbtn font500" @tap.stop="Concat(item.supplier_mobile)">联系商家</view>
+							<view class="gkbtn colorfff font500" @tap.stop="Concat(item.user_mobile)">联系顾客</view>
+						</view>
+						<!-- <view class="color333 font26" slot='stay'>确认取货</view> -->
+					</ordercomplted>
+				</view>
+				<!-- <view v-else class="flex flex_jus-cen flex_al-cen font26 color666">-没有更多数据拉(*^_^*)-</view> -->
+			</view>
+			<!-- 配送中 -->
+			<view class="page-item" v-if='tabIndex===2'>
+				<view v-if="orderList.length!==0">
+					<ordercomplted class="pageitem" v-if='tabIndex===2' @tap="GogiveDetail(item)" v-for="(item,v) in orderList" :key='v'
+					 :orderList='item'>
+						<text class="color3434 bold font26" slot='tit'>订单号：{{item.order_sn}}</text>
+						<text class="color333 font26 font500" slot='concat'>距离：{{item.distance}}km</text>
+						<view class="flex text_cen" slot='btn'>
+							<view class="sjbtn font500" @tap.stop="Concat(item.supplier_mobile)">联系商家</view>
+							<view class="gkbtn colorfff font500" @tap.stop="Concat(item.user_mobile)">联系顾客</view>
+						</view>
+					</ordercomplted>
+				</view>
+				<!-- <view v-else class="flex flex_jus-cen flex_al-cen font26 color666">-没有更多数据拉(*^_^*)-</view> -->
+			</view>
+		</view>
 		<Pop v-if="isPop">
 			<view class="color3434 bold font36 successtxt" slot='successtxt'>抢单成功</view>
 			<view class="color9a9a font500 font26" slot='subtet'>请前往商家取货配送</view>
-			<view class="btnpop font500 font32 text_cen colorfff"
-			slot='btnpop' @tap="ChildPickup(order)">前往取货</view>
+			<view class="btnpop font500 font32 text_cen colorfff" slot='btnpop' @tap="ChildPickup(order)">前往取货</view>
 		</Pop>
-		<concatpop v-if="isConcatPop"  />
+		<concatpop v-if="isConcatPop" />
+		<uni-load-more :loadingType="loadingType" />
 	</view>
 </template>
 
@@ -88,6 +80,7 @@
 	import Pop from '@/components/PopBox/PopBox.vue'
 	import ordercomplted from '@/components/OrderCompleted/OrderCompleted.vue'
 	import concatpop from '@/components/ConcatPop/ConcatPop.vue'
+	import UniLoadMore from "@/components/uni-load-more.vue";
 	import {
 		mapState,
 	} from 'vuex';
@@ -96,7 +89,8 @@
 			distribution,
 			Pop,
 			ordercomplted,
-			concatpop
+			concatpop,
+			UniLoadMore
 		},
 		computed: {
 			...mapState({
@@ -105,13 +99,11 @@
 				userId: (state) => state.userId,
 				tel: (state) => state.tel,
 				order: (state) => state.order,
-				
+
 			}),
 		},
-		created() {
-			this.getOrderCenter(1)
-			console.log(this.userId)
-		},
+
+
 		data() {
 			return {
 				homenavList: [{
@@ -139,20 +131,53 @@
 				scrollInto: '',
 				indicatorLineLeft: 64,
 				isTap: false,
-				orderList: '' //订单列表
+				orderList: [], //订单列表
+				loadingType: '',
+				pages: 1,
+
 			}
 		},
+		onLoad() {
+			this.orderList=[]
+			this.getOrderCenter()
+			console.log(this.userId)
+		},
+		// 下拉刷新
+		onPullDownRefresh() {
+			this.pages = 1;
+			this.orderList = []
+			this.getOrderCenter()
+		},
+		// 上拉加载
+		onReachBottom() {
+			this.pages++;
+			this.getOrderCenter()
+		},
 		methods: {
-			getOrderCenter(type) { //获取订单列表
+			getOrderCenter() { //获取订单列表
 				let that = this
 				let params = {
-					user_id:this.userId,
-					type,
-					page: 1,
+					user_id: that.userId,
+					type: that.tabIndex + 1,
+					page: that.pages,
 				}
 				that.request.getdata('getOrderList', params).then(res => {
-					this.orderList = res.data.orderList
+					
+					// this.orderList = res.data.orderList
+					uni.stopPullDownRefresh();
 					console.log(res, '订单列表')
+					if (that.orderList.length < 1) {
+						that.orderList = res.data.orderList
+					} else {
+						res.data.orderList.map((news) => {
+							that.orderList.push(news);
+						});
+					}
+					if (that.orderList.length == res.data.orderCount) {
+						that.loadingType = 2;
+					} else {
+						that.loadingType = 0;
+					}
 				})
 			},
 			ontabtap(e) {
@@ -165,13 +190,17 @@
 					var offsetXEl = data.right
 					var lineL = (2 * (offsetXEl) - (1.5 * (offsetXEl - offsetX)))
 				}).exec();
-				this.getOrderCenter(index + 1)
+				this.pages = 1;
+				this.orderList = [];
+				this.getOrderCenter()
 			},
 			onswiperchange(e) {
 				let index = e.detail.current;
 				this.tabIndex = index
 				this.scrollInto = this.homenavList[index].id
-				this.getOrderCenter(index + 1)
+				this.pages = 1;
+				this.orderList = [];
+				this.getOrderCenter()
 			},
 			animationfinish(e) {
 				let index = e.detail.current;
@@ -182,7 +211,7 @@
 					url: `../../Detail/OrdercompDetail/OrdercompDetail?id=${item.id}`
 				});
 			},
-			GoPickupDetail(item) {//取货详情
+			GoPickupDetail(item) { //取货详情
 				uni.navigateTo({
 					url: `../../Detail/PickupDetail/PickupDetail?id=${item.id}`
 				})
@@ -192,46 +221,61 @@
 					url: `../../Detail/distribuDetail/distribuDetail?id=${item.id}`
 				})
 			},
-			GogiveDetail(item){
+			GogiveDetail(item) {
 				uni.navigateTo({
 					url: `../../Detail/giveDetail/giveDetail?id=${item.id}`
 				})
 			},
 			Concat(phone) { //一键拨号
 				console.log(phone)
-				this.$store.commit('Call',phone)
+				this.$store.commit('Call', phone)
 				this.$store.commit("showConcatPop", true);
 			},
 			ChildPickup(item) { //取货
 				let that = this
 				console.log(item)
-				that.map.map(item.lat,item.log,item.name)
+				that.map.map(item.lat, item.log, item.name)
 				this.$store.commit("showPop", false);
 			},
-			GunList(lat, log, name) { //抢单
-				let item={lat, log, name}
-				this.$store.commit("showPop", true);
-				this.$store.commit('Order',item)
+			GunList(lat, log, name,val) { //抢单
+				let item = {
+					lat,
+					log,
+					name
+				}
+				this.$store.commit('Order', item)
 				let that = this
 				let params = {
-					order_id: item.id,
+					order_id: val.id,
 					user_id: this.userId,
 				}
-				// that.request.getdata('getOrderGrabbing', params).then(res => {
-				// 	console.log(res, '抢单')
-				// 	res.code == 300 && uni.showToast({
-				// 		title: '抢单失败',
-				// 		icon: 'none',
-				// 		duration: 3000
-				// 	});
-				// })
-			
+				that.request.getdata('getOrderGrabbing', params).then(res => {
+					if(res.code==200){
+						this.$store.commit("showPop", true);
+					}
+					console.log(res, '抢单')
+					res.code == 300 && uni.showToast({
+						title: '抢单失败',
+						icon: 'none',
+						duration: 3000
+					});
+					that.pages=1,
+					that.orderList=[]
+					that.getOrderCenter();
+				})
+
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
+	.comm1 {
+		background-color: #F7F9FA;
+		height: 100%;
+		width: 100%;
+	}
+
 	.tab-bar {
 		width: 750upx;
 		white-space: nowrap;
@@ -314,13 +358,13 @@
 	}
 
 	.component {
-		margin-bottom: 200upx;
+		// margin-bottom: 200upx;
 	}
 
 	.sjbtn {
 		width: 220upx;
 		height: 80upx;
-		border: 1upx solid #EEEEEE;
+		border: 1px solid #EEEEEE;
 		box-shadow: 0px 5upx 20upx 0px rgba(209, 108, 77, 0.2);
 		border-radius: 10upx;
 		color: #666;
@@ -346,18 +390,18 @@
 		width: 500upx;
 		height: 80upx;
 		background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
-		box-shadow: 1upx 5upx 20upx 0px rgba(209, 109, 78, 0.2);
+		box-shadow: 1px 5upx 20upx 0px rgba(209, 109, 78, 0.2);
 		border-radius: 10upx;
 		line-height: 80upx;
 		margin: 0 auto;
 		margin-top: 60upx;
 	}
-	
+
 	.btn1 {
 		width: 200upx;
 		height: 60upx;
 		background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
-		box-shadow: 1upx 5upx 20upx 0upx rgba(209, 109, 78, 0.2);
+		box-shadow: 1px 5upx 20upx 0upx rgba(209, 109, 78, 0.2);
 		border-radius: 30upx;
 		line-height: 60upx;
 	}

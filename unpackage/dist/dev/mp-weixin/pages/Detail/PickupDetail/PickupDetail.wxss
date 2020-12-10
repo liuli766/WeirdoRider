@@ -128,9 +128,6 @@ view.data-v-5cc834aa, text.data-v-5cc834aa {
 .comm.data-v-5cc834aa {
   background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
 }
 /*其他样式*/
 .commbtn.data-v-5cc834aa {
@@ -181,7 +178,7 @@ view.data-v-5cc834aa, text.data-v-5cc834aa {
 .pickupdetail .sjbtn.data-v-5cc834aa {
   width: 250rpx;
   height: 80rpx;
-  border: 1rpx solid #EEEEEE;
+  border: 1px solid #EEEEEE;
   box-shadow: 0px 5rpx 20rpx 0px rgba(209, 108, 77, 0.2);
   border-radius: 10rpx;
   color: #666;
@@ -207,7 +204,7 @@ view.data-v-5cc834aa, text.data-v-5cc834aa {
   height: 80rpx;
   background: -webkit-linear-gradient(9deg, #6E9AF8 0%, #3C66DF 100%);
   background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
-  box-shadow: 1rpx 5rpx 20rpx 0px rgba(209, 109, 78, 0.2);
+  box-shadow: 1px 5rpx 20rpx 0px rgba(209, 109, 78, 0.2);
   border-radius: 10rpx;
   line-height: 80rpx;
   margin: 0 auto;
@@ -243,7 +240,7 @@ view.data-v-5cc834aa, text.data-v-5cc834aa {
 .popbox .popup .confirm.data-v-5cc834aa {
   width: 200rpx;
   line-height: 80rpx;
-  border: 1rpx solid #EEEEEE;
+  border: 1px solid #EEEEEE;
   border-radius: 10rpx;
 }
 .popbox .popup .cancel.data-v-5cc834aa {
@@ -257,7 +254,7 @@ view.data-v-5cc834aa, text.data-v-5cc834aa {
 .popbox .popup .input.data-v-5cc834aa {
   width: 500rpx;
   height: 80rpx;
-  border: 1rpx solid #EDEDED;
+  border: 1px solid #EDEDED;
   border-radius: 10rpx;
   padding: 0 30rpx;
   box-sizing: border-box;
@@ -330,7 +327,7 @@ view.data-v-5cc834aa, text.data-v-5cc834aa {
 .popbox .popup textarea.data-v-5cc834aa {
   width: 500rpx;
   height: 280rpx;
-  border: 1rpx solid #DEDEDE;
+  border: 1px solid #DEDEDE;
   border-radius: 10rpx;
   padding: 28rpx 30rpx;
   box-sizing: border-box;

@@ -5,7 +5,7 @@
 		</view>
 		<view class="mb30 flex person-nav">
 			<view class="iconfont icon-iconfont-left font50" style="color: #333333 !important;"  @tap="back"></view>
-			<view class="nickname">实名认证</view>
+			<view class="nickname">账户设置</view>
 		</view>
 		<view class="account-head font500 font30 color3434 flex flex_be mt30 mb30">
 			<text>头像</text>
@@ -28,6 +28,7 @@
 		</view>
 		<view class="user-btn text_cen font32 font500 colorfff" @tap="handConfirm">确定修改</view>
 		<comminput v-if="iscomminput && (selectId==i)" :userinfoList='item' :idNum='i' v-for="(item,i) in usersetList" :key='i'
+		:IdCard='30'
 		 @handKeep='handKeep'></comminput>
 	</view>
 </template>
@@ -37,6 +38,9 @@
 	import {
 		mapState,
 	} from 'vuex';
+	import uploadImage from '../../../utils/uploadFile.js'
+	import util from '../../../utils/util.js'
+	let pwd = uni.getStorageSync('pawd');
 	export default {
 		components: {
 			comminput,
@@ -59,18 +63,14 @@
 					},
 					{
 						name: '登录密码',
-						placeholder: ''
+						placeholder: pwd
 					},
 				],
 			}
 		},
-		watch: {
-			usersetList() {
-				this.person()
-			}
-		},
 		onLoad() {
-			this.person()
+			this.person();
+			console.log(pwd)
 		},
 		computed: {
 			...mapState({
@@ -83,13 +83,15 @@
 				let user_name = this.usersetList[0].placeholder //用户昵称
 				let mobile = this.usersetList[2].placeholder //手机号
 				let password = this.usersetList[3].placeholder //登录密码
+				let real_name = this.usersetList[1].placeholder //登录密码
 				let that = this
 				let params = {
-					user_id: this.userId,
+					user_id: that.userId,
 					user_name,
 					mobile,
 					password,
-					head_img: this.headimg,
+					real_name,
+					head_img: that.headimg,
 				}
 				that.request.getdata('getUserSave', params).then(res => {
 					console.log(res, '修改资料')
@@ -97,6 +99,9 @@
 						title: res.msg,
 						icon: 'none',
 						duration: 3000
+					});
+					uni.navigateBack({
+						delta: 1
 					});
 				})
 			},
@@ -118,8 +123,35 @@
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album'], //从相册选择
 					success: function(res) {
-						that.headimg = res.tempFilePaths[0]
-						console.log(JSON.stringify(res.tempFilePaths));
+						// that.headimg = res.tempFilePaths[0]
+						// console.log(JSON.stringify(res.tempFilePaths));
+						var tempFilePaths = res.tempFilePaths;
+						var nowTime = util.formatTime(new Date());
+						
+						//支持多图上传
+						for (var i = 0; i < res.tempFilePaths.length; i++) {
+							//显示消息提示框
+							uni.showLoading({
+								title: '上传中' + (i + 1) + '/' + res.tempFilePaths.length,
+								mask: true
+							})
+						
+							//上传图片
+							//你的域名下的/cbb文件下的/当前年月日文件下的/图片.png
+							//图片路径可自行修改
+							uploadImage(res.tempFilePaths[i], 'poster/' + nowTime + '/',
+								function(result) {
+									console.log("======上传成功图片地址为：", result);
+									that.headimg = result
+						
+									uni.hideLoading();
+								},
+								function(result) {
+									console.log("======上传失败======", result);
+									uni.hideLoading()
+								}
+							)
+						}
 					}
 				});
 			},
@@ -204,7 +236,7 @@
 			width: 690upx;
 			height: 80upx;
 			background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
-			box-shadow: 1upx 5upx 20upx 0px rgba(209, 109, 78, 0.2);
+			box-shadow: 1px 5upx 20upx 0px rgba(209, 109, 78, 0.2);
 			border-radius: 10upx;
 			line-height: 80upx;
 			margin: 0 auto;

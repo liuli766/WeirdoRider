@@ -17,7 +17,7 @@
 					<input type="text" :placeholder="item.placeholder" disabled />
 					<view class="icon-yjt iconfont icon-you"></view>
 				</view>
-				<text class="color3434 font500 font30" v-if="i==2">性别</text>
+				<text class="color3434 font500 font30" style="flex: 1;" v-if="i==2"  @tap.stop="handDownmeun">性别</text>
 				<view class="flex flex_al-cen flex_jus-cen meun-name" @tap.stop="handDownmeun" v-if="i==2">
 					<input type="text" :placeholder="gender" disabled />
 					<view class="icon-yjt iconfont icon-you" :class="{rotate: isDownmeun}"></view>
@@ -41,6 +41,7 @@
 		</view>
 		<view class="commbtn text_cen colorfff" @tap="handConfirm">确认提交</view>
 		<comminput v-if="iscomminput && (selectId==i)" :userinfoList='item' :idNum='i' v-for="(item,i) in usersetList" :key='i'
+		:IdCard='20'
 		 @handKeep='handKeep'></comminput>
 	</view>
 </template>
@@ -50,6 +51,8 @@
 	import {
 		mapState,
 	} from 'vuex';
+	import uploadImage from '../../../utils/uploadFile.js'
+	import util from '../../../utils/util.js'
 	export default {
 		components: {
 			comminput,
@@ -112,31 +115,6 @@
 					face_img: this.face_img,
 					back_img: this.back_img,
 				}
-				
-				// let imgs = [
-				// 	{
-				// 		name: "face_img", 
-				// 		uri: this.face_img
-				// 	},{
-				// 		name: "back_img", 
-				// 		uri: this.back_img
-				// 	}
-				// ]
-				// console.log(that.request.base+'/Rider/userReal')
-				// uni.uploadFile({
-				//     url:that.request.base+'/Rider/userReal', 
-				//     files:imgs,
-				// 	filePath: this.back_img, // uni.chooseImage函数调用后获取的本地文件路劲
-				// 	name:'file', 
-				//     formData: JSON.stringify(params),
-				//     header:{"Content-Type": "multipart/form-data"},
-				// 	success: (res) => {
-				// 		console.log(res)
-				// 	},
-				// 	fail: (res) => {
-				// 	    console.log(res)
-				// 	}
-				// })
 				that.request.getdata('getUserReal', params).then(res => {
 					console.log(res, '实名认证')
 					this.$store.commit('handuserReal',res.is_real)
@@ -144,6 +122,9 @@
 						title: res.msg,
 						icon: 'none',
 						duration: 3000
+					});
+					uni.navigateBack({
+						delta: 1
 					});
 				})
 			},
@@ -166,8 +147,9 @@
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album'], //从相册选择
 					success: function(res) {
-						that.face_img = res.tempFilePaths[0]
-						console.log(JSON.stringify(res.tempFilePaths));
+						// that.face_img = res.tempFilePaths[0]
+						// console.log(JSON.stringify(res.tempFilePaths));
+						that.upImg(res.tempFilePaths, 'face')
 					}
 				});
 			},
@@ -178,10 +160,46 @@
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album'], //从相册选择
 					success: function(res) {
-						that.back_img = res.tempFilePaths[0]
-						console.log(JSON.stringify(res.tempFilePaths));
+						// that.back_img = res.tempFilePaths[0]
+						// console.log(JSON.stringify(res.tempFilePaths));
+						that.upImg(res.tempFilePaths, 'back')
 					},
 				});
+			},
+			upImg(Images, type) { //上传阿里云
+				// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+				let that = this
+				var tempFilePaths = Images;
+				var nowTime = util.formatTime(new Date());
+			
+				//支持多图上传
+				for (var i = 0; i < Images.length; i++) {
+					//显示消息提示框
+					uni.showLoading({
+						title: '上传中' + (i + 1) + '/' + Images.length,
+						mask: true
+					})
+			
+					//上传图片
+					//你的域名下的/cbb文件下的/当前年月日文件下的/图片.png
+					//图片路径可自行修改
+					uploadImage(Images[i], 'poster/' + nowTime + '/',
+						function(result) {
+							console.log("======上传成功图片地址为：", result);
+							if (type == 'face') {
+								that.face_img = result
+							} else if (type == 'back') {
+								that.back_img = result
+							} 
+			
+							uni.hideLoading();
+						},
+						function(result) {
+							console.log("======上传失败======", result);
+							uni.hideLoading()
+						}
+					)
+				}
 			},
 			handDownmeun() {
 				this.isDownmeun = true

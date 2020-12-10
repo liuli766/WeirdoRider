@@ -22,9 +22,9 @@
 			订单配送遇到问题，未能按时到达，
 			<text style="color: #5D82FF;">提起申诉</text>
 		</view>
-		<view class="flex text_cen">
+		<view class="flex text_cen flex_jus-cen">
 			<view class="sjbtn font500" @tap.stop='Concat(detail.user_mobile)'>联系顾客</view>
-			<view class="gkbtn colorfff font500">待用户评价</view>
+			<!-- <view class="gkbtn colorfff font500">待用户评价</view> -->
 		</view>
 		<concatpop v-if="isConcatPop"/>
 	</view>
@@ -43,7 +43,8 @@
 		},
 		data() {
 			return {
-
+				orderid:'',
+				detail:""
 			}
 		},
 		computed: {
@@ -52,6 +53,18 @@
 				isConcatPop:(state) => state.isConcatPop,
 				tel: (state) => state.tel,
 			}),
+		},
+		onLoad(option) {
+			console.log(option)
+			this.orderid=option.id
+			let that = this
+			let params = {
+				order_id: option.id
+			}
+			that.request.getdata('getOrderInfo', params).then(res => {
+				this.detail = res.data
+				console.log(res, '详情')
+			})
 		},
 		methods: {
 			Concat(phone){
@@ -93,7 +106,7 @@
 		.sjbtn{
 			width: 250upx;
 			height: 80upx;
-			border: 1upx solid #EEEEEE;
+			border: 1px solid #EEEEEE;
 			box-shadow: 0px 5upx 20upx 0px rgba(209, 108, 77, 0.2);
 			border-radius: 10upx;
 			color: #666;

@@ -17,19 +17,19 @@
 		<view class="font30 font500 color333 mb30">
 			<view class="flex flex_be flex_al-cen list-item list-line">
 				<text>开户人姓名</text>
-				<input type="text" placeholder="填写姓名" v-model="user_name" />
+				<input type="text" placeholder="填写姓名" :value="user_name" :focus='true' @input='userName'/>
 			</view>
 			<view class="flex flex_be flex_al-cen list-item list-line">
 				<text>开户行支行</text>
-				<input type="text" placeholder="填写开户行支行" v-model="bank_son" />
+				<input type="text" placeholder="填写开户行支行" :value="bank_son" @input="bankSon" />
 			</view>
 			<view class="flex flex_be flex_al-cen list-item list-line">
 				<text>银行卡号</text>
-				<input type="number" placeholder="填写银行卡号" v-model="bank_number" />
+				<input type="number" placeholder="填写银行卡号" :value="bank_number" @input="bankNumber" />
 			</view>
 			<view class="flex flex_be flex_al-cen list-item list-line">
 				<text>手机号码</text>
-				<input type="number" placeholder="银行预留手机号" v-model="phone" />
+				<input type="number" placeholder="银行预留手机号" :value="phone" @input="Phone" />
 			</view>
 		</view>
 		<view>
@@ -39,7 +39,7 @@
 			</view>
 			<view class="flex flex_be list-item flex_al-cen">
 				<text>输入验证码</text>
-				<input type="number" placeholder="输入验证码" v-model="code" />
+				<input type="number" placeholder="输入验证码" :value="code" @input="Code"/>
 			</view>
 		</view>
 		<view class="btn font32 font500 colorfff text_cen" @tap="getBindBank">确定修改</view>
@@ -135,6 +135,9 @@
 				}
 				that.request.getdata('getBindBank', params).then(res => {
 					console.log(res, '银行卡信息')
+					uni.navigateBack({
+					    delta: 1
+					});
 				})
 			},
 			getcode() { //获取验证码
@@ -176,6 +179,26 @@
 			handSelect(item) {
 				this.selectText = item.mingcheng
 				this.isShowPop = false
+			},
+			userName(e) { //用户名称
+				let val = e.detail.value
+				this.user_name = val
+			},
+			bankSon(e){//开户支行
+				let val = e.detail.value
+				this.bank_son = val
+			},
+			bankNumber(e){//银行卡号
+				let val = e.detail.value
+				this.bank_number = val
+			},
+			Phone(e){//手机号码
+				let val = e.detail.value
+				this.phone = val
+			},
+			Code(e){
+				let val = e.detail.value
+				this.code = val
 			}
 		}
 	}

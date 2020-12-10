@@ -143,7 +143,7 @@
 		width: 500upx;
 		height: 80upx;
 		background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
-		box-shadow: 1upx 5upx 20upx 0px rgba(209, 109, 78, 0.2);
+		box-shadow: 1px 5upx 20upx 0px rgba(209, 109, 78, 0.2);
 		border-radius: 10upx;
 		line-height: 80upx;
 		margin: 0 auto;

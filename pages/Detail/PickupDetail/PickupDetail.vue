@@ -2,7 +2,7 @@
 	<view class="pickupdetail comm">
 		<view class="page-item">
 			<ordercomplted class="page-item" :orderList='detail'>
-				<text class="color3434 bold font32" slot='tit'>顾客已等待3分钟</text>
+				<text class="color3434 bold font32" slot='tit'>骑手待取货</text>
 				<view class="evaluate font500 font24 text_cen" slot='stay'>待取货</view>
 				<text class="color333 font26 font500" slot='concat' @tap.stop='Concat(detail.supplier_mobile)'>联系商家</text>
 			</ordercomplted>
@@ -24,7 +24,7 @@
 		</view>
 		<view class="flex text_cen">
 			<view class="sjbtn font500" @tap="getCancel">取消订单</view>
-			<view class="gkbtn colorfff font500" @tap="Goods">确认收货</view>
+			<view class="gkbtn colorfff font500" @tap="Goods">确认取货</view>
 		</view>
 		<concatpop v-if="isConcatPop" />
 		<Pop v-if="isPop">
@@ -38,20 +38,19 @@
 					取消订单
 				</view>
 				<view style="position: relative;" @tap="Oninput">
-					<input type="text" placeholder="请选择订单取消原因"  class="input" disabled="disabled" v-model="selectText" />
+					<input type="text" placeholder="请选择订单取消原因" class="input" disabled="disabled" v-model="selectText" />
 					<text class="sanj"></text>
 				</view>
 				<view class="list-container font28 color666" v-if="isShowList">
 					<span class="popper__arrow"></span>
-					<scroll-view scroll-y=true scroll-x=true style="background-color: #fff;"  class="list"
-					:style="'max-height: ' + listBoxHeight +'upx;'">
+					<scroll-view scroll-y=true scroll-x=true style="background-color: #fff;" class="list" :style="'max-height: ' + listBoxHeight +'upx;'">
 						<view v-for="(item,i) in CancelList" :key='i' @tap="onClickItem(item)" class="itemlist">{{item.name}}</view>
 						<view v-if="CancelList.length==0" class="data-state item">无数据</view>
 					</scroll-view>
 				</view>
 				<view class="font26 color999 ml mt30">
-					<textarea  placeholder="备注信息"  v-model="NoteText"/>
-				</view>
+					<textarea placeholder="备注信息" v-model="NoteText" />
+					</view>
 				<view class="font32 font500 flex" style="margin-top: 60upx;">
 					<view class="confirm color666 text_cen ml mr" @tap="handcancel">取消</view>
 					<view class="cancel colorfff text_cen" @tap="handconfirm(detail)">确认提交</view>
@@ -81,7 +80,8 @@
 				isShowList:false,// 是否显示列表框
 				selectText:'',// 已经选择的内容
 				isShowPop:false,//取消订单弹框
-				NoteText:''
+				NoteText:'',
+				orderid:''
 			}
 		},
 		computed: {
@@ -94,6 +94,7 @@
 		},
 		onLoad(option) {
 			console.log(option)
+			this.orderid=option.id
 			let that = this
 			let params = {
 				order_id: option.id
@@ -112,8 +113,16 @@
 				this.$store.commit('Call',phone)
 				this.$store.commit("showConcatPop", true);
 			},
-			Goods() {
-				this.$store.commit("showPop", true);
+			Goods() { //确认取货
+				let that = this
+				let params = {
+					order_id: this.orderid
+				}
+				that.request.getdata('getorderPickup', params).then(res => {
+					console.log(res, '确认取货')
+					this.$store.commit("showPop", true);
+				})
+				
 			},
 			getCancel() { //取消订单按钮
 				this.isShowPop=true
@@ -125,8 +134,8 @@
 			console.log(item,'确认取消订单')
 				let that = this
 				let params = {
-					order_id: item.id,
-					user_id: this.userId,
+					order_id:that.orderid,
+					user_id: that.userId,
 				}
 				if(this.selectText!==''){
 					that.request.getdata('getCancel', params).then(res => {
@@ -199,7 +208,7 @@
 		.sjbtn {
 			width: 250upx;
 			height: 80upx;
-			border: 1upx solid #EEEEEE;
+			border: 1px solid #EEEEEE;
 			box-shadow: 0px 5upx 20upx 0px rgba(209, 108, 77, 0.2);
 			border-radius: 10upx;
 			color: #666;
@@ -227,7 +236,7 @@
 		width: 500upx;
 		height: 80upx;
 		background: linear-gradient(81deg, #6E9AF8 0%, #3C66DF 100%);
-		box-shadow: 1upx 5upx 20upx 0px rgba(209, 109, 78, 0.2);
+		box-shadow: 1px 5upx 20upx 0px rgba(209, 109, 78, 0.2);
 		border-radius: 10upx;
 		line-height: 80upx;
 		margin: 0 auto;
@@ -264,7 +273,7 @@
 			.confirm {
 				width: 200upx;
 				line-height: 80upx;
-				border: 1upx solid #EEEEEE;
+				border: 1px solid #EEEEEE;
 				border-radius: 10upx;
 
 			}
@@ -280,7 +289,7 @@
 			.input {
 				width: 500upx;
 				height: 80upx;
-				border: 1upx solid #EDEDED;
+				border: 1px solid #EDEDED;
 				border-radius: 10upx;
 				padding: 0 30upx;
 				box-sizing: border-box;
@@ -343,7 +352,7 @@
 			textarea{
 				width: 500upx;
 				height: 280upx;
-				border: 1upx solid #DEDEDE;
+				border: 1px solid #DEDEDE;
 				border-radius: 10upx;
 				padding: 28upx 30upx;
 				box-sizing: border-box;

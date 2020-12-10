@@ -128,9 +128,6 @@ view.data-v-36aad972, text.data-v-36aad972 {
 .comm.data-v-36aad972 {
   background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
 }
 /*其他样式*/
 .commbtn.data-v-36aad972 {
@@ -200,5 +197,19 @@ view.data-v-36aad972, text.data-v-36aad972 {
   background: #fff;
   padding-right: 30rpx;
   text-align: right;
+}
+.loading-text.data-v-36aad972 {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
 }
 

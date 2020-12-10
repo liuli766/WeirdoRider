@@ -128,9 +128,6 @@ view.data-v-6623dc68, text.data-v-6623dc68 {
 .comm.data-v-6623dc68 {
   background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
 }
 /*其他样式*/
 .commbtn.data-v-6623dc68 {
@@ -181,7 +178,7 @@ view.data-v-6623dc68, text.data-v-6623dc68 {
 .detail .sjbtn.data-v-6623dc68 {
   width: 250rpx;
   height: 80rpx;
-  border: 1rpx solid #EEEEEE;
+  border: 1px solid #EEEEEE;
   box-shadow: 0px 5rpx 20rpx 0px rgba(209, 108, 77, 0.2);
   border-radius: 10rpx;
   color: #666;

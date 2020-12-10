@@ -128,9 +128,6 @@ view.data-v-57f70ff8, text.data-v-57f70ff8 {
 .comm.data-v-57f70ff8 {
   background-color: #F7F9FA;
   height: 100%;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
 }
 /*其他样式*/
 .commbtn.data-v-57f70ff8 {
@@ -166,7 +163,6 @@ view.data-v-57f70ff8, text.data-v-57f70ff8 {
 }
 .content .addrbox.data-v-57f70ff8 {
   padding: 20rpx;
-  background: #FAFAFA;
 }
 .content .addrbox .addrlist .addrtit image.data-v-57f70ff8 {
   width: 36rpx;

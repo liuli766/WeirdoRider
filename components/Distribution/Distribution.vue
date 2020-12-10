@@ -80,7 +80,7 @@
 
 		.addrbox {
 			padding: 20upx;
-			background: #FAFAFA;
+			// background: #FAFAFA;
 
 			.addrlist {
 				.addrtit {

@@ -29,11 +29,11 @@
 							<image src="../../../static/img/num1.png" class="num" v-if="item.status===1"></image>
 							<image src="../../../static/img/num2.png" class="num" v-if="item.status===2"></image>
 							<image src="../../../static/img/num3.png" class="num" v-if="item.status===3"></image>
-							<image :src="item.head" class="head"></image>
-							<text>{{item.name}}</text>
+							<image :src="item.head_img" class="head"></image>
+							<text>{{item.user_name}}</text>
 						</view>
 						<view class="bold talent-list-price font28">
-							{{item.numberval}}
+							{{item.total}}
 						</view>
 					</view>
 					<view class="talent-list-item flex flex_jus-cen flex_al-cen text_cen font26 color666" v-if="dataList.length==0">-没有更多数据拉-</view>
@@ -63,11 +63,12 @@
 							<image src="../../../static/img/num1.png" class="num" v-if="item.status===1"></image>
 							<image src="../../../static/img/num2.png" class="num" v-if="item.status===2"></image>
 							<image src="../../../static/img/num3.png" class="num" v-if="item.status===3"></image>
-							<image :src="item.head" class="head"></image>
-							<text>{{item.name}}</text>
+							<image :src="item.head_img?item.head_img:'../../../static/img/head.png'" class="head"></image>
+
+							<text>{{item.user_name}}</text>
 						</view>
 						<view class="bold talent-list-price font28">
-							{{item.numberval}}
+							{{item.total}}
 						</view>
 					</view>
 					<view class="talent-list-item flex flex_jus-cen flex_al-cen text_cen font26 color666" v-if="dataList.length==0">-没有更多数据拉-</view>
